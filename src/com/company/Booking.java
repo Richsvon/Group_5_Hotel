@@ -19,5 +19,5 @@ public class Booking {
         return "Room nr:" + bookingId + "\n" +
                 "TotalPrice: " + TotalPrice + "kr\n" +
                 "-----------------------------------";
-
+    }
 }
