@@ -2,12 +2,11 @@ package com.company;
 
 import java.util.Scanner;
 
-public class Main {
-
+public class HotelApp {
     Scanner in = new Scanner(System.in);
-
+    HotelLogic H = new HotelLogic();
     public static void main(String[] args) {
-        Main myApp = new Main();
+        HotelApp myApp = new HotelApp();
         myApp.runProgram();
     }
 
