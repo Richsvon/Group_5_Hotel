@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class HotelLogic {
 
-    ArrayList<Room> rooms = new ArrayList<>();
 
 
 
@@ -13,13 +12,9 @@ public class HotelLogic {
 
 
 
+    public ArrayList<Booking> addBooking = new ArrayList<>();
 
-
-
-
-
-
-    public ArrayList<Room> addRoom (ArrayList rooms)   {
+    public ArrayList<Room> roomArr (ArrayList rooms) {
         Scanner input = new Scanner(System.in);
 
         System.out.print("Roomnumber: ");
@@ -33,6 +28,8 @@ public class HotelLogic {
         System.out.print("Booked ");
         boolean isBooked = input.nextBoolean();
 
+        Booking newBooking = new Booking(RoomNumber, PricePerNight);
+        addBooking.add(newBooking);
 
         Room room = new Room(RoomNumber, NumberOfBeds, HasBalcony, PricePerNight, isBooked);
         rooms.add(room);
