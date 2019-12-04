@@ -1,11 +1,14 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Booking {
 
     private int bookingId;
     private double TotalPrice;
 
-    public Booking(int bookingId, double totalPrice) {
+
+    public Booking(int checkInDate) {
         this.bookingId = bookingId;
         TotalPrice = totalPrice;
     }
