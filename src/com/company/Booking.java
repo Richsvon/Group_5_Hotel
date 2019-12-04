@@ -6,11 +6,13 @@ public class Booking {
 
     private int bookingId;
     private double TotalPrice;
+    private ArrayList<Room> rooms;
 
 
-    public Booking(int checkInDate) {
+    public Booking(int checkInDate,ArrayList<Room> rooms) {
+        this.rooms = rooms;
         this.bookingId = bookingId;
-        TotalPrice = totalPrice;
+
     }
 
     public int getBookingId(){
