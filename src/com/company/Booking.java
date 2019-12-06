@@ -11,6 +11,7 @@ public class Booking {
     public Booking(int bookingId, double totalPrice) {
         this.bookingId = bookingId;
         this.totalPrice = totalPrice;
+        System.out.println("testing branching");
     }
 
 
