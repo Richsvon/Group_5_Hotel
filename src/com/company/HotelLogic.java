@@ -5,9 +5,14 @@ import java.util.Scanner;
 
 public class HotelLogic {
     Scanner input = new Scanner(System.in);
+
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
+
+    public void viewBooking () {
+        
+    }
 
     public void addRoom () {
 
