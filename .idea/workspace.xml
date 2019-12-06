@@ -4,6 +4,7 @@
     <list default="true" id="dbde3496-f7b0-4561-8da9-cc2adadfd8d7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/HotelLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/HotelLogic.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +20,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="bookingClass" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="Booking" />
