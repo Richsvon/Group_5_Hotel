@@ -10,10 +10,18 @@ public class HotelLogic {
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
 
-    public void editBooking () {
-        for (Booking b: bookings) {
-            System.out.println(b);
+    public void setIDMethod () {
+        int id = 0;
+        while (rooms.get(id) != null) {
+
         }
+    }
+
+    public void getBooking () {
+        System.out.println("Enter ID of the person you want to change");
+        int id = input.nextInt();
+        System.out.println(bookings.get(id));
+
     }
 
     public void addRoom () {

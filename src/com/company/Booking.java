@@ -16,7 +16,14 @@ public class Booking {
         this.roomInfo = roomInfo;
     }
 
-    
+    public Customer getCustomerInfo () {
+        return customerInfo;
+    }
+
+    public Room getRoomInfo() {
+        return roomInfo;
+    }
+
     @Override
     public String toString() {
         return "Room nr:" + bookingId + "\n" +
