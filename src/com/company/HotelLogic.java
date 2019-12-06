@@ -11,10 +11,10 @@ public class HotelLogic {
 
 
 
-
+    public ArrayList<Room> rooms = new ArrayList<>();
     public ArrayList<Booking> addBooking = new ArrayList<>();
 
-    public ArrayList<Room> roomArr (ArrayList rooms) {
+    public void roomArr () {
         Scanner input = new Scanner(System.in);
 
         System.out.print("Roomnumber: ");
@@ -33,8 +33,6 @@ public class HotelLogic {
 
         Room room = new Room(RoomNumber, NumberOfBeds, HasBalcony, PricePerNight, isBooked);
         rooms.add(room);
-
-        return rooms;
     }
 
 
