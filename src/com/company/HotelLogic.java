@@ -10,8 +10,10 @@ public class HotelLogic {
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
 
-    public void viewBooking () {
-        
+    public void editBooking () {
+        for (Booking b: bookings) {
+            System.out.println(b);
+        }
     }
 
     public void addRoom () {

@@ -16,11 +16,7 @@ public class Booking {
         this.roomInfo = roomInfo;
     }
 
-    public double getTotalPrice() {
-
-        return totalPrice;
-    }
-
+    
     @Override
     public String toString() {
         return "Room nr:" + bookingId + "\n" +
