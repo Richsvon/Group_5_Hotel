@@ -35,5 +35,29 @@ public class HotelLogic {
         rooms.add(room);
     }
 
+    //Metoden för addCustomer.
+    //Jag har kallat på metoden från "HotelLogic = H" i HotelApp classen.
+
+    public void addCustomer () {
+        Scanner input = new Scanner(System.in);
+        Customer Costumer = new Customer("", "", "", "");
+
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+        System.out.println("Enter SSN ");
+        String socialSecurityNumber = input.nextLine();
+
+        System.out.println("Enter Name ");
+        String name = input.nextLine();
+
+        System.out.println("Enter address ");
+        String address = input.nextLine();
+
+        System.out.println("Enter telephone number ");
+        String telephoneNumber = input.nextLine();
+
+        customers.add(new Customer(socialSecurityNumber, name, address, telephoneNumber));
+
+
+    }
 
 }

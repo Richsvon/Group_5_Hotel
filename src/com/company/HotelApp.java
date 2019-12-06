@@ -8,6 +8,7 @@ public class HotelApp {
     public static void main(String[] args) {
         HotelApp myApp = new HotelApp();
         myApp.runProgram();
+
     }
 
     public void runProgram() {
@@ -40,7 +41,7 @@ public class HotelApp {
             } else if (choice == 6) {
 
             } else if (choice == 7) {
-
+                H.addCustomer();
             } else if (choice == 8) {
 
             } else if (choice == 9) {
