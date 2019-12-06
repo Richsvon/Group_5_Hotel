@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class HotelApp {
     Scanner input = new Scanner(System.in);
     HotelLogic H = new HotelLogic();
+
     public static void main(String[] args) {
         HotelApp myApp = new HotelApp();
         myApp.runProgram();
@@ -27,7 +28,7 @@ public class HotelApp {
                 }
             }
             checkInput = true;
-            switch(choice){
+            switch (choice) {
                 case 1:
 
                     break;
@@ -41,13 +42,13 @@ public class HotelApp {
                     H.addRoom();
                     break;
                 case 5:
-
+                    H.editRoom();
                     break;
                 case 6:
 
                     break;
                 case 7:
-                        H.addCustomer();
+                    H.addCustomer();
                     break;
                 case 8:
 
@@ -77,7 +78,7 @@ public class HotelApp {
 
                     break;
                 case 17:
-                    checkExit=false;
+                    checkExit = false;
                     break;
             }
         }
