@@ -35,7 +35,7 @@ public class HotelApp {
 
                     break;
                 case 3:
-
+                    H.viewAvailableRooms();
                     break;
                 case 4:
                     H.addRoom();
@@ -77,7 +77,7 @@ public class HotelApp {
 
                     break;
                 case 17:
-
+                    checkExit=false;
                     break;
             }
         }
