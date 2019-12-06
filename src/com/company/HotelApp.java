@@ -3,7 +3,7 @@ package com.company;
 import java.util.Scanner;
 
 public class HotelApp {
-    Scanner in = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
     HotelLogic H = new HotelLogic();
     public static void main(String[] args) {
         HotelApp myApp = new HotelApp();
@@ -19,7 +19,7 @@ public class HotelApp {
             printMenu();
             while (checkInput) {
                 System.out.println("Enter your choice: ");
-                choice = Integer.parseInt(in.nextLine());
+                choice = Integer.parseInt(input.nextLine());
                 if (choice < 1 || choice > 17) {
                     System.out.println("Invalid input, please enter a number 1-17.");
                 } else {
@@ -27,41 +27,58 @@ public class HotelApp {
                 }
             }
             checkInput = true;
+            switch(choice){
+                case 1:
 
-            if (choice == 1) {
+                    break;
+                case 2:
 
-            } else if (choice == 2) {
+                    break;
+                case 3:
 
-            } else if (choice == 3) {
+                    break;
+                case 4:
+                    H.addRoom();
+                    break;
+                case 5:
 
-            } else if (choice == 4) {
+                    break;
+                case 6:
 
-            } else if (choice == 5) {
+                    break;
+                case 7:
+                        H.addCustomer();
+                    break;
+                case 8:
 
-            } else if (choice == 6) {
+                    break;
+                case 9:
 
-            } else if (choice == 7) {
-                H.addCustomer();
-            } else if (choice == 8) {
+                    break;
+                case 10:
 
-            } else if (choice == 9) {
+                    break;
+                case 11:
 
-            } else if (choice == 10) {
+                    break;
+                case 12:
 
-            } else if (choice == 11) {
+                    break;
+                case 13:
 
-            } else if (choice == 12) {
+                    break;
+                case 14:
 
-            } else if (choice == 13) {
+                    break;
+                case 15:
 
-            } else if (choice == 14) {
+                    break;
+                case 16:
 
-            } else if (choice == 15) {
+                    break;
+                case 17:
 
-            } else if (choice == 16) {
-
-            } else if (choice == 17) {
-                checkExit = false;
+                    break;
             }
         }
     }

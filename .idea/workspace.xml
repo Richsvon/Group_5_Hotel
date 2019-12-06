@@ -4,8 +4,7 @@
     <list default="true" id="dbde3496-f7b0-4561-8da9-cc2adadfd8d7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/HotelApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/HotelApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/HotelLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/HotelLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Booking.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
