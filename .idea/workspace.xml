@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dbde3496-f7b0-4561-8da9-cc2adadfd8d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/HotelLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/HotelLogic.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,6 +80,13 @@
       <option name="presentableId" value="Default" />
       <updated>1575372782349</updated>
     </task>
+    <task id="LOCAL−00001" summary="nu får 'Booking' info från 'Room' men vi behöver lägga till saker">
+      <created>1575477245473</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1575477245473</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,6 +115,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="nu får 'Booking' info från 'Room' men vi behöver lägga till saker" />
+    <option name="LAST_COMMIT_MESSAGE" value="nu får 'Booking' info från 'Room' men vi behöver lägga till saker" />
   </component>
   <component name="masterDetails">
     <states>

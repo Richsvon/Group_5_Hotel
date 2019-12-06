@@ -11,7 +11,6 @@ public class Customer {
         this.name = name;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
-        System.out.println("trying out branching");
     }
 
     @Override
