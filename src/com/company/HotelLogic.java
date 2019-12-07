@@ -10,6 +10,49 @@ public class HotelLogic {
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
 
+    public void addTestObjects(){
+        //lägger till 3 rum och 3 customers för att kunna testa metoder.
+        rooms.add(new Room(1,1,false,99,false));
+        rooms.add(new Room(2,2,false,99,true));
+        rooms.add(new Room(3,3,true,99,false));
+        customers.add(new Customer("11","11","11","11"));
+        customers.add(new Customer("22","22","22","22"));
+        customers.add(new Customer("33","33","33","33"));
+
+    }
+    public void viewCustomers(){
+
+    }
+    public void viewRooms(){
+
+    }
+    public void removeRoom(){
+
+    }
+    public void removeCustomer(){
+
+    }
+    public void searchForBooking(){
+
+    }
+    public void makeBooking(){
+
+    }
+    public void checkIn(){
+
+    }
+    public void checkOut(){
+
+    }
+    public void viewCustomerHistory(){
+
+    }
+    public void editBooking(){
+
+    }
+    public void editCustomer(){
+
+    }
     public void setIDMethod () {
         int id = 0;
         while (rooms.get(id) != null) {

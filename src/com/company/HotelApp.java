@@ -13,6 +13,7 @@ public class HotelApp {
     }
 
     public void runProgram() {
+        H.addTestObjects();
         boolean checkExit = true;
         boolean checkInput = true;
         int choice = 0;
@@ -30,10 +31,10 @@ public class HotelApp {
             checkInput = true;
             switch (choice) {
                 case 1:
-
+                    H.viewCustomers();
                     break;
                 case 2:
-
+                    H.viewRooms();
                     break;
                 case 3:
                     H.viewAvailableRooms();
@@ -45,39 +46,36 @@ public class HotelApp {
                     H.editRoom();
                     break;
                 case 6:
-
+                    H.removeRoom();
                     break;
                 case 7:
                     H.addCustomer();
                     break;
                 case 8:
-
+                    H.removeCustomer();
                     break;
                 case 9:
-
+                    H.searchForBooking();
                     break;
                 case 10:
-
+                    H.makeBooking();
                     break;
                 case 11:
-
+                    H.checkIn();
                     break;
                 case 12:
-
+                    H.checkOut();
                     break;
                 case 13:
-
+                    H.viewCustomerHistory();
                     break;
                 case 14:
-
+                    H.editBooking();
                     break;
                 case 15:
-
+                    H.editCustomer();
                     break;
                 case 16:
-
-                    break;
-                case 17:
                     checkExit = false;
                     break;
             }
@@ -105,21 +103,21 @@ public class HotelApp {
         System.out.println("------------------------------------------------");
         System.out.println("8: remove customer.");
         System.out.println("------------------------------------------------");
-        System.out.println("10: Search for bookingID.");
+        System.out.println("9: Search for bookingID.");
         System.out.println("------------------------------------------------");
-        System.out.println("11: Make booking.");
+        System.out.println("10: Make booking.");
         System.out.println("------------------------------------------------");
-        System.out.println("12: Check in.");
+        System.out.println("11: Check in.");
         System.out.println("------------------------------------------------");
-        System.out.println("13: Check out.");
+        System.out.println("12: Check out.");
         System.out.println("------------------------------------------------");
-        System.out.println("14: View customers bookings, current and previous.");
+        System.out.println("13: View customers bookings, current and previous.");
         System.out.println("------------------------------------------------");
-        System.out.println("15: Edit booking.");
+        System.out.println("14: Edit booking.");
         System.out.println("------------------------------------------------");
-        System.out.println("16: Edit customer.");
+        System.out.println("15: Edit customer.");
         System.out.println("------------------------------------------------");
-        System.out.println("17: Exit!");
+        System.out.println("16: Exit!");
         System.out.println("------------------------------------------------");
     }
 }
