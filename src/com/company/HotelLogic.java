@@ -27,13 +27,13 @@ public class HotelLogic {
     public void addRoom () {
 
         System.out.print("Roomnumber: ");
-        int RoomNumber = input.nextInt();
+        int RoomNumber = Integer.parseInt(input.nextLine());
         System.out.print("Beds:  ");
-        int NumberOfBeds = input.nextInt();
+        int NumberOfBeds = Integer.parseInt(input.nextLine());
         System.out.print("Balcony ");
-        boolean HasBalcony = input.nextBoolean();
+        boolean HasBalcony = Boolean.parseBoolean(input.nextLine());
         System.out.print("Price ");
-        double PricePerNight = input.nextDouble();
+        double PricePerNight = Double.parseDouble(input.nextLine());
 
         Room room = new Room(RoomNumber, NumberOfBeds, HasBalcony, PricePerNight, false);
         rooms.add(room);
@@ -59,12 +59,16 @@ public class HotelLogic {
     public void viewAvailableRooms(){
         for (int i = 0; i < rooms.size() ; i++) {
             if(rooms.get(i).getisBooked() == false ){
-                System.out.println("Room [" + i + "] :");
+                System.out.println(rooms.get(i));
             }
         }
     }
 
     public void editRoom(){
+        for (int i = 0; i < rooms.size() ; i++) {
+            System.out.println("Room [" + i + "] " + rooms.get(i));
+        }
+
         System.out.println("Enter the index of the room you want to change: ");
         int index = Integer.parseInt(input.nextLine());
         System.out.println("Current Room info: " + rooms.get(index));
