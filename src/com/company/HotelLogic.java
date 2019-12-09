@@ -40,6 +40,13 @@ public class HotelLogic {
     public void searchForBooking(){
 
     }
+
+    public void viewBookings () {
+        for (Integer b: bookings) {
+            System.out.println(b);
+        }
+    }
+
     public void makeBooking(){
         int id = 0;
 
@@ -69,14 +76,6 @@ public class HotelLogic {
 
     }
     public void editCustomer(){
-
-    }
-    
-
-    public void getBooking () {
-        System.out.println("Enter ID of the person you want to change");
-        int id = input.nextInt();
-        System.out.println(bookings.get(id));
 
     }
 
