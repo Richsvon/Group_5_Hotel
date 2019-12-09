@@ -15,13 +15,16 @@ public class HotelLogic {
         rooms.add(new Room(1,1,false,99,false));
         rooms.add(new Room(2,2,false,99,true));
         rooms.add(new Room(3,3,true,99,false));
-        customers.add(new Customer("11","11","11","11"));
-        customers.add(new Customer("22","22","22","22"));
-        customers.add(new Customer("33","33","33","33"));
+        customers.add(new Customer("11","Richard","vägen11","0701111"));
+        customers.add(new Customer("22","Tim","vägen22","0702222"));
+        customers.add(new Customer("33","Jesper","vägen33","0703333"));
+        customers.add(new Customer("44","Achmaad", "vägen44","0704444"));
 
     }
     public void viewCustomers(){
-
+        for (Customer c: customers) {
+            System.out.println(c);
+        }
     }
     public void viewRooms(){
 
