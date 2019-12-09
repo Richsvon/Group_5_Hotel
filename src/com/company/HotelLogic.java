@@ -43,13 +43,16 @@ public class HotelLogic {
     public void makeBooking(){
         int id = 0;
 
-        new Booking(id);
         System.out.println("Welcome to HKR Hotel\n" +
                 "to make a booking please follow these instructions");
         addCustomer();
         for (int i = 0; i < bookings.size(); i++){
-
+            if (bookings.get(i) == null) {
+                i = id;
+            }
         }
+        System.out.println("your ID: " + id);
+        
 
     }
     public void checkIn(){
