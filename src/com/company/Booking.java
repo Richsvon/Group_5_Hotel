@@ -7,13 +7,30 @@ public class Booking {
     private double totalPrice;
 
 
-    public Booking(int bookingId) {
+    public Booking(int bookingId, double totalPrice) {
+        this.bookingId = bookingId;
+        this.totalPrice = totalPrice;
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
         this.bookingId = bookingId;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     @Override
     public String toString() {
-        return "Booking ID:" + bookingId + "\n";
+        return "Booking ID: " + bookingId + "\n" +
+                "Total price: " + totalPrice;
     }
 }

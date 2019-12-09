@@ -7,7 +7,7 @@ public class HotelLogic {
     Scanner input = new Scanner(System.in);
 
     private ArrayList<Room> rooms = new ArrayList<>();
-    private ArrayList<Booking> bookings = new ArrayList<>();
+    private ArrayList<Integer> bookings = new ArrayList<Integer>();
     private ArrayList<Customer> customers = new ArrayList<>();
 
     public void addTestObjects(){
@@ -52,7 +52,8 @@ public class HotelLogic {
             }
         }
         System.out.println("your ID: " + id);
-        
+        bookings.add(id);
+
 
     }
     public void checkIn(){
@@ -70,12 +71,7 @@ public class HotelLogic {
     public void editCustomer(){
 
     }
-    public void setIDMethod () {
-        int id = 0;
-        while (rooms.get(id) != null) {
-
-        }
-    }
+    
 
     public void getBooking () {
         System.out.println("Enter ID of the person you want to change");
