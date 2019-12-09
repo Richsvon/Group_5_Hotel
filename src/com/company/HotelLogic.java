@@ -20,6 +20,8 @@ public class HotelLogic {
         customers.add(new Customer("33","Jesper","vägen33","0703333"));
         customers.add(new Customer("44","Achmaad", "vägen44","0704444"));
 
+
+
     }
     public void viewCustomers(){
         for (Customer c: customers) {
