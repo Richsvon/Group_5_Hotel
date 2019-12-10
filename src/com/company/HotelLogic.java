@@ -54,7 +54,7 @@ public class HotelLogic {
         System.out.println("Welcome to HKR Hotel\n" +
                 "to make a booking please follow these instructions");
         addCustomer();
-        
+
 
     }
     public void checkIn(){
