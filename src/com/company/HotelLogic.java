@@ -24,9 +24,7 @@ public class HotelLogic {
 
     }
     public void viewCustomers(){
-        for (Customer c: customers) {
-            System.out.println(c);
-        }
+
     }
     public void viewRooms(){
 
@@ -37,10 +35,6 @@ public class HotelLogic {
     public void removeCustomer(){
 
     }
-    public void searchForBooking(){
-        System.out.println("enter booking ID");
-
-    }
 
     public void viewBookings () {
         for (Booking b: bookings) {
@@ -48,15 +42,13 @@ public class HotelLogic {
         }
     }
 
-    public void makeBooking(){
-        int id = 1;
-
+    public void makeBooking() {
         System.out.println("Welcome to HKR Hotel\n" +
                 "to make a booking please follow these instructions");
         addCustomer();
 
-
     }
+
     public void checkIn(){
 
     }
