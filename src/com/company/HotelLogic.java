@@ -7,7 +7,7 @@ public class HotelLogic {
     Scanner input = new Scanner(System.in);
 
     private ArrayList<Room> rooms = new ArrayList<>();
-    private ArrayList<Integer> bookings = new ArrayList<Integer>();
+    private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
 
     public void addTestObjects(){
@@ -38,11 +38,12 @@ public class HotelLogic {
 
     }
     public void searchForBooking(){
+        System.out.println("enter booking ID");
 
     }
 
     public void viewBookings () {
-        for (Integer b: bookings) {
+        for (Booking b: bookings) {
             System.out.println(b);
         }
     }
@@ -59,9 +60,7 @@ public class HotelLogic {
             }
         }
         System.out.println("your ID: " + id);
-        bookings.add(id);
-
-
+        bookings.add(new Booking(id));
     }
     public void checkIn(){
 

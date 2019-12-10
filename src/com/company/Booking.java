@@ -7,9 +7,8 @@ public class Booking {
     private double totalPrice;
 
 
-    public Booking(int bookingId, double totalPrice) {
+    public Booking(int bookingId) {
         this.bookingId = bookingId;
-        this.totalPrice = totalPrice;
     }
 
     public int getBookingId() {
