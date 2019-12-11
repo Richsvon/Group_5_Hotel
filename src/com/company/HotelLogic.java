@@ -23,6 +23,9 @@ public class HotelLogic {
 
 
     }
+    public void searchForBooking(){
+
+    }
     public void viewCustomers(){
 
     }
