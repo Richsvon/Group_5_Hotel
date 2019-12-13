@@ -90,7 +90,18 @@ public class HotelLogic {
     }
 
     public void checkIn(){
+        System.out.println("Check in with your name: ");
+        String stringName = input.nextLine();
 
+        for (int i = 0; i < customers.size(); i++) {
+             if(customers.get(i).getName().equals(stringName)){
+                System.out.println("welcome \n" + customers.get(i));
+                //Booked room example
+                 System.out.println("You have room nr" + rooms.get(1).getRoomNumber());
+                break;
+                //need to show booked room related to the customer
+            }
+        }
     }
     public void checkOut(){
 
