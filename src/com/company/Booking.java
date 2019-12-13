@@ -25,6 +25,14 @@ public class Booking {
         return bookingId;
     }
 
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
     public double getTotalPrice() {
         return totalPrice;
     }
