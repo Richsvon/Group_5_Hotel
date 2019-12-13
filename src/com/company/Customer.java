@@ -13,6 +13,10 @@ public class Customer {
         this.telephoneNumber = telephoneNumber;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
