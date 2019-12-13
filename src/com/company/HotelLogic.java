@@ -20,6 +20,8 @@ public class HotelLogic {
         customers.add(new Customer("33","Jesper","vägen33","0703333"));
         customers.add(new Customer("44","Achmaad", "vägen44","0704444"));
 
+        bookings.add(new Booking(99,191201, 191205, rooms,customers.get(0)));
+        bookings.add(new Booking(199,191206, 191209, rooms,customers.get(1)));
 
 
     }
@@ -46,10 +48,45 @@ public class HotelLogic {
     }
 
     public void makeBooking() {
-        System.out.println("Welcome to HKR Hotel\n" +
-                "to make a booking please follow these instructions");
-        addCustomer();
+        double totalPrice = 0;
+        ArrayList<Room> roomsToBook = new ArrayList<>();
 
+        System.out.println("Enter the SSN of the customer that is making the booking (YYMMDDXXXX");
+        String SSN = input.nextLine();
+        int customerIndex = 0;
+        for (int i = 0; i < customers.size() ; i++) {
+            if (customers.get(i).getSocialSecurityNumber().equalsIgnoreCase(SSN)) {
+                customerIndex = i;
+            }
+        }
+
+        System.out.println("How many rooms do you want to book");
+        int numberOfRooms = Integer.parseInt(input.nextLine());
+
+        System.out.println("Enter check in date: (format YYMMDD");
+        int checkInDate = Integer.parseInt(input.nextLine());
+
+        System.out.println("Enter check out date: (format YYMMDD");
+        int checkOutDate = Integer.parseInt(input.nextLine());
+
+        int numberOfNights = checkOutDate - checkInDate;
+
+        for (int i = 0; i < numberOfRooms; i++) {
+            int roomIndex = 0;
+            viewAvailableRooms();
+            System.out.println("Enter the roomnumber of the room you want to book");
+            int roomNumber = Integer.parseInt(input.nextLine());
+            for (int j = 0; j < rooms.size(); j++) {
+                if(rooms.get(i).getRoomNumber() == roomNumber) {
+                    roomIndex = j;
+                }
+
+            }
+            totalPrice = totalPrice + (rooms.get(roomIndex).getPricePerNight() * numberOfNights);
+            roomsToBook.add(rooms.get(roomIndex));
+        }
+        bookings.add(new Booking(totalPrice, checkInDate, checkOutDate,roomsToBook,customers.get(customerIndex)));
+        viewBookings();
     }
 
     public void checkIn(){

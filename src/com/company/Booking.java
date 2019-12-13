@@ -1,24 +1,28 @@
 package com.company;
 
 
+import java.util.ArrayList;
+
 public class Booking {
-
-    private int bookingId;
+    private static int counter =  1;
+    private final int bookingId;
     private double totalPrice;
+    private int checkInDate;
+    private int checkOutDate;
+    private ArrayList<Room> rooms;
+    private Customer customer;
 
-
-    public Booking(int bookingId, double totalPrice) {
-        this.bookingId = bookingId;
+    public Booking(double totalPrice, int checkInDate, int checkOutDate, ArrayList<Room> rooms, Customer customer) {
+        this.bookingId = counter++;
         this.totalPrice = totalPrice;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.rooms = rooms;
+        this.customer = customer;
     }
 
     public int getBookingId() {
         return bookingId;
-    }
-
-
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
     }
 
     public double getTotalPrice() {
@@ -31,7 +35,12 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking ID: " + bookingId + "\n" +
-                "Total price: " + totalPrice;
+        return  "\nbookingId: " + bookingId +
+                "\n totalPrice: " + totalPrice +
+                "\n checkInDate: " + checkInDate +
+                "\n checkOutDate: " + checkOutDate +
+                "\n rooms: " + rooms +
+                "\n customer: " + customer +
+                "\n------------------------------------- \n";
     }
 }
