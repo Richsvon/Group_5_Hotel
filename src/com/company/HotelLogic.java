@@ -22,6 +22,7 @@ public class HotelLogic {
 
         bookings.add(new Booking(99, 191201, 191205, rooms, customers.get(0)));
         bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(1)));
+        bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
 
 
     }
@@ -47,7 +48,7 @@ public class HotelLogic {
     }
 
     public void viewBookings() {
-        for (Booking b: bookings) {
+        for (Booking b : bookings) {
             System.out.println(b);
         }
     }
@@ -96,52 +97,42 @@ public class HotelLogic {
 
     public void checkIn() {
         System.out.println("Check in with your ID: ");
+
         int ID = input.nextInt();
-
-        int i = 0;
-        while (ID != bookings.get(i).getBookingId()) {
-            if (ID != bookings.get(i).getBookingId()) {
-                i++;
-            } else if (ID == bookings.get(i).getBookingId()) {
-
+/*
+        if (bookings.get(ID).getBookingId() == ID) {
+            System.out.println(bookings.get(ID));
+        } else {
+            System.out.println("Sorry nothing matches that ID try again");
+        }
+ */
+        for (int i = 0; i < bookings.size(); i++) {
+             if(bookings.get(i).getBookingId() == (ID)){
+                System.out.println("welcome \n" + bookings.get(ID));
             }
         }
-        System.out.println("Sorry nothing matches that ID try again");
-
-        /*for (int i = 0; i < customers.size(); i++) {
-             if(Booking.get(i).getName() == (ID)){
-                System.out.println("welcome \n" + customers.get(i));
-
-            }
-        }
-         */
     }
 
     public void checkOut() {
         System.out.println("Enter customers ID");
         int bookingID = input.nextInt();
 
-        for (int i = 0; i < bookings.size(); i++) {
-            if (bookings.get(i).getBookingId() == bookingID) {
-                System.out.println("Is this the correct information ? \n" +
-                        bookings.get(i).getBookingId() + "\n" +
+        System.out.println("is this the correct information? \n" +
+                bookings.get(bookingID) + "\n" +
+                "press 1) Yes       press 2) No");
 
-                        "\n press 1) Yes      press 2) No");
+        int choice = input.nextInt();
+        switch (choice){
+            case 1:
+                bookings.remove(bookingID);
+            case 2:
+                System.out.println("returning to menu");
+                break;
 
-                input.nextLine();
-                int choice = input.nextInt();
-
-                switch (choice) {
-                    case 1:
-                        System.out.println("Removed: " + bookings);
-                        bookings.remove(i);
-                        break;
-                    case 2:
-                        System.out.println("try again");
-                        break;
-                }
-            }
         }
+        input.nextLine();
+        input.nextLine();
+
     }
 
     public void viewCustomerHistory() {
@@ -158,7 +149,7 @@ public class HotelLogic {
 
     public void addRoom() {
 
-        System.out.print("Roomnumber: ");
+        System.out.print("Room number: ");
         int RoomNumber = Integer.parseInt(input.nextLine());
         System.out.print("Beds:  ");
         int NumberOfBeds = Integer.parseInt(input.nextLine());
