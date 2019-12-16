@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Scanner;
 
-public class    HotelApp {
+public class HotelApp {
     Scanner input = new Scanner(System.in);
     HotelLogic H = new HotelLogic();
 

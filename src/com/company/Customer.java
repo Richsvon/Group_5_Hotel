@@ -17,6 +17,10 @@ public class Customer {
         return socialSecurityNumber;
     }
 
+    public void setSocialSecurityNumber(String socialSecurityNumber)    {
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
+
     public String getName() {
         return name;
     }

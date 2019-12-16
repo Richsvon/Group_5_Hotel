@@ -32,19 +32,55 @@ public class HotelLogic {
     }
 
     public void viewCustomers() {
+        System.out.println("Printing a list of all customers");
+        System.out.println("-----------------------------------------------");
 
+        for (int i = 0; i < customers.size(); i++)  {
+            System.out.println("Social security number: " + customers.get(i).getSocialSecurityNumber());
+            System.out.println("Name: " + customers.get(i).getName());
+            System.out.println("Address: " + customers.get(i).getAddress());
+            System.out.println("Telephone: " + customers.get(i).getTelephoneNumber());
+            System.out.println("-----------------------------------------------");
+        }
     }
 
     public void viewRooms() {
+        System.out.println("Printing a list of all rooms");
+        System.out.println("-----------------------------------------------");
+        for (int i = 0; i < rooms.size(); i++)  {
+            System.out.println("Room number: " + rooms.get(i).getRoomNumber());
+            System.out.println("Number of beds: " + rooms.get(i).getRoomNumber());
+            System.out.println("Balcony : " + rooms.get(i).getRoomNumber());
+            System.out.println("Price per night: " + rooms.get(i).getRoomNumber());
+            System.out.println("Is the room booked: " + rooms.get(i).getRoomNumber());
+            System.out.println("-----------------------------------------------");
+        }
 
     }
 
     public void removeRoom() {
+        System.out.println("Enter the room number of the room you would like to remove:");
+        int roomNumber = Integer.parseInt(input.nextLine());
+
+        for (int i = 0; i < rooms.size(); i++)  {
+            if (rooms.get(i).getRoomNumber() == roomNumber) {
+                rooms.remove(i);
+                System.out.println("Room was successfully removed");
+            }
+        }
 
     }
 
     public void removeCustomer() {
+        System.out.println("Enter the name of the customer you would like to remove:");
+        String name = input.nextLine();
 
+        for (int i = 0; i < customers.size(); i++)  {
+            if (customers.get(i).getName().equals(name)) {
+                customers.remove(i);
+                System.out.println("Customer was successfully removed");
+            }
+        }
     }
 
     public void viewBookings() {
@@ -107,7 +143,7 @@ public class HotelLogic {
         }
  */
         for (int i = 0; i < bookings.size(); i++) {
-             if(bookings.get(i).getBookingId() == (ID)){
+            if(bookings.get(i).getBookingId() == (ID)){
                 System.out.println("welcome \n" + bookings.get(ID));
             }
         }
@@ -144,7 +180,40 @@ public class HotelLogic {
     }
 
     public void editCustomer() {
+        for (int i = 0; i < customers.size(); i++) {
+            System.out.println("Index (" + i + ")");
+            System.out.println("Social security number: " + customers.get(i).getSocialSecurityNumber());
+            System.out.println("Name: " + customers.get(i).getName());
+            System.out.println("Address: " + customers.get(i).getAddress());
+            System.out.println("Telephone: " + customers.get(i).getTelephoneNumber());
+            System.out.println("-----------------------------------------------");
+        }
+        System.out.println("Enter the index of the customer you want to change: ");
+        int index = Integer.parseInt(input.nextLine());
 
+        System.out.println("------------ Current customer info ------------");
+        System.out.println("Social security number: " + customers.get(index).getSocialSecurityNumber());
+        System.out.println("Name: " + customers.get(index).getName());
+        System.out.println("Address: " + customers.get(index).getAddress());
+        System.out.println("Telephone: " + customers.get(index).getTelephoneNumber());
+        System.out.println("-----------------------------------------------");
+
+
+        System.out.print("Current social security number: " + customers.get(index).getSocialSecurityNumber() + "\nEnter a new social security number: ");
+        String SocialSecurityNumber = input.nextLine();
+        customers.get(index).setSocialSecurityNumber(SocialSecurityNumber);
+
+        System.out.print("Current name: " + customers.get(index).getName() + "\nNew name: ");
+        String name = input.nextLine();
+        customers.get(index).setName(name);
+
+        System.out.print("Current address: " + customers.get(index).getAddress() + "\nEnter a new address: ");
+        String address = input.nextLine();
+        customers.get(index).setAddress(address);
+
+        System.out.print("Current phone number: " + customers.get(index).getTelephoneNumber() + "\nEnter a new phone number: ");
+        String TelephoneNumber = input.nextLine();
+        customers.get(index).setTelephoneNumber(TelephoneNumber);
     }
 
     public void addRoom() {
