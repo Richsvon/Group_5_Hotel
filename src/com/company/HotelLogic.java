@@ -89,6 +89,7 @@ public class HotelLogic {
         }
     }
 
+
     public void makeBooking() {
         double totalPrice = 0;
         ArrayList<Room> roomsToBook = new ArrayList<>();
@@ -132,43 +133,44 @@ public class HotelLogic {
     }
 
     public void checkIn() {
-        System.out.println("Check in with your ID: ");
 
-        int ID = input.nextInt();
-/*
-        if (bookings.get(ID).getBookingId() == ID) {
-            System.out.println(bookings.get(ID));
-        } else {
-            System.out.println("Sorry nothing matches that ID try again");
-        }
- */
-        for (int i = 0; i < bookings.size(); i++) {
-            if(bookings.get(i).getBookingId() == (ID)){
-                System.out.println("welcome \n" + bookings.get(ID));
+        System.out.println("Enter Booking ID: ");
+        int bookingId = input.nextInt();
+        int bookingIndex = 0;
+
+        System.out.println(bookings.get(bookingIndex + 1));
+        input.nextLine();
+
+        for (int i = 0; i < bookings.size(); i++){
+
+            if(bookings.get(i).getBookingId() == bookingId){
+                bookingIndex = i;
+                System.out.println(customers.get(bookingId));
             }
         }
+        rooms.get(bookingIndex).setisBooked(true);
+        System.out.println(bookings.get(bookingIndex));
+
     }
 
     public void checkOut() {
         System.out.println("Enter customers ID");
-        int bookingID = input.nextInt();
 
-        System.out.println("is this the correct information? \n" +
-                bookings.get(bookingID) + "\n" +
-                "press 1) Yes       press 2) No");
+        int bookingId = input.nextInt();
+        int bookingIndex = 0;
 
-        int choice = input.nextInt();
-        switch (choice){
-            case 1:
-                bookings.remove(bookingID);
-            case 2:
-                System.out.println("returning to menu");
-                break;
+        System.out.println(bookings.get(bookingIndex + 1));
+        input.nextLine();
 
+        for (int i = 0; i < bookings.size(); i++){
+
+            if (bookings.get(i).getBookingId() == bookingId){
+                bookingIndex = i;
+                System.out.println(customers.get(bookingId));
+            }
         }
-        input.nextLine();
-        input.nextLine();
-
+        rooms.get(bookingIndex).setisBooked(false);
+        System.out.println(bookings.get(bookingIndex));
     }
 
     public void viewCustomerHistory() {
