@@ -15,6 +15,7 @@ public class HotelLogic {
         rooms.add(new Room(1, 1, false, 99, false));
         rooms.add(new Room(2, 2, false, 99, true));
         rooms.add(new Room(3, 3, true, 99, false));
+
         customers.add(new Customer("11", "Richard", "vägen11", "0701111"));
         customers.add(new Customer("22", "Tim", "vägen22", "0702222"));
         customers.add(new Customer("33", "Jesper", "vägen33", "0703333"));
@@ -23,47 +24,52 @@ public class HotelLogic {
         bookings.add(new Booking(99, 191201, 191205, rooms, customers.get(0)));
         bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(1)));
         bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
-
-
     }
 
-    public void employeeLogIn() {
+    public boolean employeeLogIn() {
         String password = "";
-        do {
-            System.out.println("Enter the employee password");
-            password = input.nextLine();
-            if (!password.equals("admin")) {
-                System.out.println("Wrong password");
-            } else if (password.equals("admin")) {
-                System.out.println("Succesfull log in");
-            }
+        System.out.println("Enter the employee password");
+        password = input.nextLine();
+        if (!password.equals("admin")) {
+            System.out.println("Wrong password");
+            return false;
+        } else if (password.equals("admin")) {
+            System.out.println("Succesfull log in");
         }
-        while (!password.equals("admin"));
+        return true;
     }
 
     public int customerLogIn() {
         boolean logIn = true;
-        int index = 0;
+        int index = -1;
         while (logIn) {
-            System.out.println("Do you have an account press 1, or 2 to create a new");
+            System.out.println("Do you have an account press 1, 2 to create a new and 3 to exit");
             int choice = Integer.parseInt(input.nextLine());
-            if (choice == 1) {
-                System.out.println("Enter your name");
-                String name = input.nextLine();
-                System.out.println("Enter your SSN ");
-                String SSN = input.nextLine();
-                for (int i = 0; i < customers.size(); i++) {
-                    if (customers.get(i).getName().equals(name) && customers.get(i).getSocialSecurityNumber().equals(SSN)) {
-                        index = i;
-                        System.out.println("You are now logged in as" + customers.get(i).getName() + "with the SSN" + customers.get(i).getSocialSecurityNumber());
-                        logIn = false;
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter your name");
+                    String name = input.nextLine();
+                    System.out.println("Enter your SSN ");
+                    String SSN = input.nextLine();
+                    for (int i = 0; i < customers.size(); i++) {
+                        if (customers.get(i).getName().equalsIgnoreCase(name) && customers.get(i).getSocialSecurityNumber().equals(SSN)) {
+                            index = i;
+                            System.out.println("You are now logged in as " + customers.get(i).getName() + " with the SSN " + customers.get(i).getSocialSecurityNumber());
+                            logIn = false;
+                        }
                     }
-                }
-                System.out.println("There is no such customer");
-            } else if (choice == 2) {
-                addCustomer();
-            } else {
-                System.out.println("invalid input, 1 or 2");
+                    if (index == -1) {
+                        System.out.println("There is no such customer");
+                    }
+                    break;
+                case 2:
+                    addCustomer();
+                    break;
+                case 3:
+                    return index;
+                default:
+                    System.out.println("invalid input, 1 or 2");
+                    break;
             }
         }
         return index;
@@ -397,11 +403,11 @@ public class HotelLogic {
         System.out.println("------------------------------------------------");
         System.out.println("2: View booking history");
         System.out.println("------------------------------------------------");
-        System.out.println("3: make a new booking");
+        System.out.println("3: Make a new booking");
         System.out.println("------------------------------------------------");
-        System.out.println("4: edit your info");
+        System.out.println("4: Edit your info");
         System.out.println("------------------------------------------------");
-        System.out.println("5: exit program");
+        System.out.println("5: Exit to log in menu");
         System.out.println("------------------------------------------------");
     }
 
@@ -438,7 +444,7 @@ public class HotelLogic {
         System.out.println("------------------------------------------------");
         System.out.println("15: Edit customer.");
         System.out.println("------------------------------------------------");
-        System.out.println("16: Exit!");
+        System.out.println("16: Exit to log in menu!");
         System.out.println("------------------------------------------------");
     }
 }
