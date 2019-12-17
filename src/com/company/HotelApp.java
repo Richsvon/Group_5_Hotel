@@ -13,7 +13,7 @@ public class HotelApp {
 
     public void runProgram() {
         H.addTestObjects();
-        int customerIndex;
+        int customerIndex = -1;
         boolean checkExit = true;
         int choice;
         boolean employee = false;
@@ -43,6 +43,7 @@ public class HotelApp {
             }//end userchoice
 //----------------------------------------------------------------------------------------------------------------------
             while (employee) {
+                customerIndex = -1;
                 H.printEmployeeMenu();
                 System.out.println("Enter your choice: ");
                 choice = Integer.parseInt(input.nextLine());
@@ -75,7 +76,7 @@ public class HotelApp {
                         H.searchForBooking();
                         break;
                     case 10:
-                        H.makeBooking();
+                        H.makeBooking(customerIndex);
                         break;
                     case 11:
                         //viewBooking is for testing purpose should. remove when necessary
@@ -112,13 +113,13 @@ public class HotelApp {
                         H.viewAvailableRoomsByDate();
                         break;
                     case 2:
-                        H.viewBookingHistory();
+                        H.viewBookingHistory(customerIndex);
                         break;
                     case 3:
-                        H.customerMakeBooking();
+                        H.makeBooking(customerIndex);
                         break;
                     case 4:
-                        H.editProfile();
+                        H.editProfile(customerIndex);
                         break;
                     case 5:
                         customer = false;

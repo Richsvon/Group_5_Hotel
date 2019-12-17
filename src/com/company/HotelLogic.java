@@ -22,7 +22,7 @@ public class HotelLogic {
         customers.add(new Customer("44", "Achmaad", "vägen44", "0704444"));
 
         bookings.add(new Booking(99, 191201, 191205, rooms, customers.get(0)));
-        bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(1)));
+        bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(0)));
         bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
     }
 
@@ -137,16 +137,16 @@ public class HotelLogic {
     }
 
 
-    public void makeBooking() {
+    public void makeBooking(int customerIndex) {
         double totalPrice = 0;
         ArrayList<Room> roomsToBook = new ArrayList<>();
-
-        System.out.println("Enter the SSN of the customer that is making the booking (YYMMDDXXXX");
-        String SSN = input.nextLine();
-        int customerIndex = 0;
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getSocialSecurityNumber().equalsIgnoreCase(SSN)) {
-                customerIndex = i;
+        if (customerIndex == -1) {
+            System.out.println("Enter the SSN of the customer that is making the booking (YYMMDDXXXX");
+            String SSN = input.nextLine();
+            for (int i = 0; i < customers.size(); i++) {
+                if (customers.get(i).getSocialSecurityNumber().equalsIgnoreCase(SSN)) {
+                    customerIndex = i;
+                }
             }
         }
 
@@ -383,16 +383,51 @@ public class HotelLogic {
 
     }
 
-    public void viewBookingHistory() {
+    public void viewBookingHistory(int customerIndex) {
+        ArrayList<Booking> yourBookings = new ArrayList<>();
+        for (int i = 0; i < bookings.size(); i++) {
+            if (bookings.get(i).getCustomer() == customers.get(customerIndex)) {
+                yourBookings.add(bookings.get(i));
+            }
+        }
+        System.out.println(yourBookings);
 
     }
 
-    public void customerMakeBooking() {
-
-    }
-
-    public void editProfile() {
-
+    public void editProfile(int index) {
+        boolean exit = true;
+        while (exit) {
+            System.out.println("edit 1,SSN 2,name 3, address 4, phone number 5, exit");
+            int choice = Integer.parseInt(input.nextLine());
+            switch (choice) {
+                case 1:
+                    System.out.print("Current social security number: " + customers.get(index).getSocialSecurityNumber() + "\nEnter a new social security number: ");
+                    String SocialSecurityNumber = input.nextLine();
+                    customers.get(index).setSocialSecurityNumber(SocialSecurityNumber);
+                    break;
+                case 2:
+                    System.out.print("Current name: " + customers.get(index).getName() + "\nNew name: ");
+                    String name = input.nextLine();
+                    customers.get(index).setName(name);
+                    break;
+                case 3:
+                    System.out.print("Current address: " + customers.get(index).getAddress() + "\nEnter a new address: ");
+                    String address = input.nextLine();
+                    customers.get(index).setAddress(address);
+                    break;
+                case 4:
+                    System.out.print("Current phone number: " + customers.get(index).getTelephoneNumber() + "\nEnter a new phone number: ");
+                    String TelephoneNumber = input.nextLine();
+                    customers.get(index).setTelephoneNumber(TelephoneNumber);
+                    break;
+                case 5:
+                    exit = false;
+                    break;
+                default:
+                    System.out.println("Ivalid input, 1-5");
+                    break;
+            }
+        }
     }
 
     public void printCustomerMenu() {
