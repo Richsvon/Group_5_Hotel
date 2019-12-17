@@ -27,9 +27,8 @@ public class HotelLogic {
     }
 
     public boolean employeeLogIn() {
-        String password = "";
         System.out.println("Enter the employee password");
-        password = input.nextLine();
+        String password = input.nextLine();
         if (!password.equals("admin")) {
             System.out.println("Wrong password");
             return false;
