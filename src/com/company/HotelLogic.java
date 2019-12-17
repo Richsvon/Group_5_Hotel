@@ -176,6 +176,44 @@ public class HotelLogic {
     }
 
     public void editBooking() {
+        for (int i = 0; i < bookings.size(); i++) {
+            System.out.println("Index (" + i + ")");
+            System.out.println("BookingId " + bookings.get(i).getBookingId());
+            System.out.println("Total price: " + bookings.get(i).getTotalPrice());
+            System.out.println("Check in: " + bookings.get(i).getCheckInDate());
+            System.out.println("Check out: " + bookings.get(i).getCheckOutDate());
+            System.out.println("-----------------------------------------------");
+
+            System.out.println("Enter the index of the booking you want to change: ");
+            int index = Integer.parseInt(input.nextLine());
+
+            System.out.println("------------ Current customer info ------------");
+            System.out.println("BookingId " + bookings.get(index).getBookingId());
+            System.out.println("Total price: " + bookings.get(index).getTotalPrice());
+
+            System.out.println("Check in: " + bookings.get(index).getCheckInDate());
+            System.out.println("Check out: " + bookings.get(index).getCheckOutDate());
+            System.out.println("-----------------------------------------------");
+
+            System.out.print("Current Check In: " + bookings.get(index).getCheckInDate() + "\nNew Check In: ");
+            int checkInDate = input.nextInt();
+            bookings.get(index).setCheckInDate(checkInDate);
+
+            System.out.print("Current Check Out: " + bookings.get(index).getCheckInDate() + "\nNew Check Out: ");
+            int checkOutDate = input.nextInt();
+            bookings.get(index).setCheckOutDate(checkOutDate);
+
+
+            // Customer får inte ändra på dessa features
+
+            // System.out.println("BookingId " + bookings.get(i).getBookingId());
+
+//            System.out.print("Current Total Price: " + bookings.get(index).getBookingId() + "\nEnter new Total price ");
+//            double totalPrice = input.nextDouble();
+//            bookings.get(index).setTotalPrice(totalPrice);
+
+
+        }
 
     }
 

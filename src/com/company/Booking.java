@@ -28,6 +28,20 @@ public class Booking {
         return totalPrice;
     }
 
+    public int getCheckInDate() {
+        return checkInDate;
+    }
+
+    public int getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckInDate(int checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+    public void setCheckOutDate(int checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
