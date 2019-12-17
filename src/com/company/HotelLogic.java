@@ -175,7 +175,6 @@ public class HotelLogic {
     }
 
     public void checkIn() {
-
         System.out.println("Enter Booking ID: ");
         int bookingId = input.nextInt();
         int bookingIndex = 0;
@@ -188,39 +187,28 @@ public class HotelLogic {
             if (bookings.get(i).getBookingId() == bookingId) {
                 bookingIndex = i;
                 System.out.println(customers.get(bookingId));
-                rooms.get(bookingIndex).setisBooked(true);
-                System.out.println(bookings.get(bookingIndex));
             }
         }
+        rooms.get(bookingIndex).setisBooked(true);
+        System.out.println(bookings.get(bookingIndex));
     }
 
     public void checkOut() {
         System.out.println("Enter customers ID");
-
         int bookingId = input.nextInt();
         int bookingIndex = 0;
+        System.out.println(bookings.get(bookingIndex + 1));
+        input.nextLine();
 
-        int choice = input.nextInt();
-        switch (choice) {
-            case 1:
-                bookings.remove(bookingID);
-            case 2:
-                System.out.println("returning to menu");
-                break;
+        for (int i = 0; i < bookings.size(); i++) {
 
-            System.out.println(bookings.get(bookingIndex + 1));
-            input.nextLine();
-
-            for (int i = 0; i < bookings.size(); i++) {
-
-                if (bookings.get(i).getBookingId() == bookingId) {
-                    bookingIndex = i;
-                    System.out.println(customers.get(bookingId));
-                }
+            if (bookings.get(i).getBookingId() == bookingId) {
+                bookingIndex = i;
+                System.out.println(customers.get(bookingId));
             }
-            rooms.get(bookingIndex).setisBooked(false);
-            System.out.println(bookings.get(bookingIndex));
         }
+        rooms.get(bookingIndex).setisBooked(false);
+        System.out.println(bookings.get(bookingIndex));
     }
 
     public void viewCustomerHistory() {
