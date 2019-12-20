@@ -23,6 +23,7 @@ public class HotelApp {
             choice = Integer.parseInt(input.nextLine());
             switch (choice) {
                 case 1:
+                    System.out.println();
                     boolean check = H.employeeLogIn();
                     if (check) {
                         employee = true;
@@ -79,8 +80,6 @@ public class HotelApp {
                         H.makeBooking(customerIndex);
                         break;
                     case 11:
-                        //viewBooking is for testing purpose should. remove when necessary
-                        H.viewBookings();
                         H.checkIn();
                         break;
                     case 12:

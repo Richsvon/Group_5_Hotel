@@ -20,6 +20,14 @@ public class Booking {
         this.customer = customer;
     }
 
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
+
     public Customer getCustomer() {
         return customer;
     }

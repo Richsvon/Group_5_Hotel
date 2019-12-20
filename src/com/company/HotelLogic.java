@@ -22,7 +22,7 @@ public class HotelLogic {
         customers.add(new Customer("44", "Achmaad", "vägen44", "0704444"));
 
         bookings.add(new Booking(99, 191201, 191205, rooms, customers.get(0)));
-        bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(0)));
+        bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(1)));
         bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
     }
 
@@ -136,7 +136,6 @@ public class HotelLogic {
         }
     }
 
-
     public void makeBooking(int customerIndex) {
         double totalPrice = 0;
         ArrayList<Room> roomsToBook = new ArrayList<>();
@@ -180,22 +179,49 @@ public class HotelLogic {
     }
 
     public void checkIn() {
+        //ask for ssn
+        //step 2
+        System.out.println(bookings.get(1).getCustomer());
+        System.out.println("enter your ssn");
+        String ssn = input.nextLine();
+        for (int i = 0; i < bookings.size(); i++) {
+
+            if (bookings.get(i).getCustomer().getSocialSecurityNumber().equals(ssn)) {
+                break;
+            }
+        }
+        //---------------------------------------------------------------------------------------------
+        //witch booking id?
         System.out.println("Enter Booking ID: ");
         int bookingId = input.nextInt();
-        int bookingIndex = 0;
+        bookingId--;
+        //int bookingIndex;
+        Booking temp;
 
-        System.out.println(bookings.get(bookingIndex + 1));
+        System.out.println(bookings.get(bookingId));
         input.nextLine();
 
         for (int i = 0; i < bookings.size(); i++) {
-
+            temp = bookings.get(i);
+                //go through the booking room is booked and change it all to true
             if (bookings.get(i).getBookingId() == bookingId) {
-                bookingIndex = i;
-                System.out.println(customers.get(bookingId));
+                temp.getRooms().get(i).getisBooked();
+
+                while (!temp.getRooms().get(i).getisBooked()) {
+                    temp.getRooms().get(i).setisBooked(true);
+                    if (temp.getRooms().get(i).getisBooked()){
+                        i++;
+                    }
+                }
+                System.out.println(temp.getRooms());
+
+
+                //bookingIndex = i;
+                //rooms.get(bookingIndex).setisBooked(true);
+                //System.out.println(customers.get(bookingId) + "\n" +
+                        //bookings.get(bookingIndex));
             }
         }
-        rooms.get(bookingIndex).setisBooked(true);
-        System.out.println(bookings.get(bookingIndex));
     }
 
     public void checkOut() {
