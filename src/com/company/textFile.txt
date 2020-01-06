@@ -1,0 +1,78 @@
+Info about: Customer{socialSecurityNumber='11', name='Richard', address='vägen11', telephoneNumber='0701111'},
+Has booked Room nr: [Room 
+Room number: 1
+Number of beds: 1
+Balcony: false
+Price per night: 99.0
+Room booked: false
+------------------------------------- 
+, Room 
+Room number: 2
+Number of beds: 2
+Balcony: false
+Price per night: 99.0
+Room booked: true
+------------------------------------- 
+, Room 
+Room number: 3
+Number of beds: 3
+Balcony: true
+Price per night: 99.0
+Room booked: false
+------------------------------------- 
+],
+Between 191201 -- 191205,
+Total cost: 99.0
+---------------------------------------------------------------------------------
+Info about: Customer{socialSecurityNumber='22', name='Tim', address='vägen22', telephoneNumber='0702222'},
+Has booked Room nr: [Room 
+Room number: 1
+Number of beds: 1
+Balcony: false
+Price per night: 99.0
+Room booked: false
+------------------------------------- 
+, Room 
+Room number: 2
+Number of beds: 2
+Balcony: false
+Price per night: 99.0
+Room booked: true
+------------------------------------- 
+, Room 
+Room number: 3
+Number of beds: 3
+Balcony: true
+Price per night: 99.0
+Room booked: false
+------------------------------------- 
+],
+Between 191206 -- 191209,
+Total cost: 199.0
+---------------------------------------------------------------------------------
+Info about: Customer{socialSecurityNumber='33', name='Jesper', address='vägen33', telephoneNumber='0703333'},
+Has booked Room nr: [Room 
+Room number: 1
+Number of beds: 1
+Balcony: false
+Price per night: 99.0
+Room booked: false
+------------------------------------- 
+, Room 
+Room number: 2
+Number of beds: 2
+Balcony: false
+Price per night: 99.0
+Room booked: true
+------------------------------------- 
+, Room 
+Room number: 3
+Number of beds: 3
+Balcony: true
+Price per night: 99.0
+Room booked: false
+------------------------------------- 
+],
+Between 191213 -- 191226,
+Total cost: 150.0
+---------------------------------------------------------------------------------

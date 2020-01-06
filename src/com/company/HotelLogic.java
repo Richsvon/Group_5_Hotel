@@ -16,7 +16,9 @@ public class HotelLogic {
 
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Booking> bookings = new ArrayList<>();
+    private ArrayList<Booking> arrBookingCopy = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
+
     private ArrayList<String> arrString = new ArrayList<>();
 
     public void addTestObjects() {
@@ -35,6 +37,10 @@ public class HotelLogic {
         bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
     }
 
+    public void copyArrBooking () {
+
+    }
+
     public void makeArrListToString() {
         for (int i = 0; i < bookings.size(); i++){
             String totalPrice = String.valueOf(bookings.get(i).getTotalPrice());
@@ -43,10 +49,11 @@ public class HotelLogic {
             String rooms = String.valueOf(bookings.get(i).getRooms());
             String customer = String.valueOf(bookings.get(i).getCustomer());
 
-            String allTheInfo = "Name: " + customer + ",\n" +
+            String allTheInfo = "Info about: " + customer + ",\n" +
                     "Has booked Room nr: " + rooms + ",\n" +
                     "Between " + checkInDate + " -- " + checkOutDate + ",\n" +
-                    "Total cost: " + totalPrice;
+                    "Total cost: " + totalPrice + "\n" +
+                    "---------------------------------------------------------------------------------";
             arrString.add(allTheInfo);
         }
         bookings.removeAll(bookings);
@@ -69,9 +76,27 @@ public class HotelLogic {
     }
 
     public void textFileToArrString () {
-        
+        try {
+            String line;
+            BufferedReader in = new BufferedReader(new FileReader(fileNameForArrString));
+            if (!in.ready()){
+                throw new  IOException();
+            }
+            while ((line = in.readLine()) != null){
+                arrString.add(line);
+            }
+            in.close();
+
+        }catch (IOException e){
+            System.out.println("ERROR Something went wrong");
+        }
     }
 
+    public void viewTextFile () {
+        for (String s:arrString) {
+            System.out.println(s);
+        }
+    }
 
     public boolean employeeLogIn() {
         System.out.println("Enter the employee password");
