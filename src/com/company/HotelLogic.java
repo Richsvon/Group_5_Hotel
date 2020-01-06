@@ -9,6 +9,7 @@ public class HotelLogic {
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
+    private ArrayList<String> arrString = new ArrayList<>();
 
     public void addTestObjects() {
         //lägger till 3 rum och 3 customers för att kunna testa metoder.
@@ -25,6 +26,19 @@ public class HotelLogic {
         bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(1)));
         bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
     }
+
+    public void makeArrListToString() {
+
+    }
+
+    public void arrStringToTextFile() {
+
+    }
+
+    public void textFileToArrString () {
+        
+    }
+
 
     public boolean employeeLogIn() {
         System.out.println("Enter the employee password");
@@ -203,13 +217,13 @@ public class HotelLogic {
 
         for (int i = 0; i < bookings.size(); i++) {
             temp = bookings.get(i);
-                //go through the booking room is booked and change it all to true
+            //go through the booking room is booked and change it all to true
             if (bookings.get(i).getBookingId() == bookingId) {
                 temp.getRooms().get(i).getisBooked();
 
                 while (!temp.getRooms().get(i).getisBooked()) {
                     temp.getRooms().get(i).setisBooked(true);
-                    if (temp.getRooms().get(i).getisBooked()){
+                    if (temp.getRooms().get(i).getisBooked()) {
                         i++;
                     }
                 }
@@ -219,7 +233,7 @@ public class HotelLogic {
                 //bookingIndex = i;
                 //rooms.get(bookingIndex).setisBooked(true);
                 //System.out.println(customers.get(bookingId) + "\n" +
-                        //bookings.get(bookingIndex));
+                //bookings.get(bookingIndex));
             }
         }
     }
