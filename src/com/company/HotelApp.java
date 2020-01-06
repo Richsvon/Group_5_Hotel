@@ -13,6 +13,9 @@ public class HotelApp {
 
     public void runProgram() {
         H.addTestObjects();
+        H.makeArrListToString();
+        H.arrStringToTextFile();
+
         int customerIndex = -1;
         boolean checkExit = true;
         int choice;
@@ -128,6 +131,8 @@ public class HotelApp {
                         break;
                 }//end switch
             }//end while customer
+            H.arrStringToTextFile();
+            H.textFileToArrString();
         }//end while checkExit
     }//end runProgram
 }//end class

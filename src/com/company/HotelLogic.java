@@ -37,17 +37,15 @@ public class HotelLogic {
         bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
     }
 
-    public void copyArrBooking () {
-
-    }
 
     public void makeArrListToString() {
+        arrBookingCopy.addAll(bookings);
         for (int i = 0; i < bookings.size(); i++){
-            String totalPrice = String.valueOf(bookings.get(i).getTotalPrice());
-            String checkInDate = String.valueOf(bookings.get(i).getCheckInDate());
-            String checkOutDate = String.valueOf(bookings.get(i).getCheckOutDate());
-            String rooms = String.valueOf(bookings.get(i).getRooms());
-            String customer = String.valueOf(bookings.get(i).getCustomer());
+            String totalPrice = String.valueOf(arrBookingCopy.get(i).getTotalPrice());
+            String checkInDate = String.valueOf(arrBookingCopy.get(i).getCheckInDate());
+            String checkOutDate = String.valueOf(arrBookingCopy.get(i).getCheckOutDate());
+            String rooms = String.valueOf(arrBookingCopy.get(i).getRooms());
+            String customer = String.valueOf(arrBookingCopy.get(i).getCustomer());
 
             String allTheInfo = "Info about: " + customer + ",\n" +
                     "Has booked Room nr: " + rooms + ",\n" +
@@ -56,7 +54,7 @@ public class HotelLogic {
                     "---------------------------------------------------------------------------------";
             arrString.add(allTheInfo);
         }
-        bookings.removeAll(bookings);
+        arrBookingCopy.removeAll(arrBookingCopy);
     }
 
     public void arrStringToTextFile() {
@@ -68,6 +66,8 @@ public class HotelLogic {
             }
             output.close();
             arrString.removeAll(arrString);
+
+            textFileToArrString();
 
         }catch (IOException e){
             JOptionPane.showMessageDialog(null,"I can not create that file");
@@ -92,7 +92,8 @@ public class HotelLogic {
         }
     }
 
-    public void viewTextFile () {
+    public void viewTextFiles () {
+        System.out.println("From string array");
         for (String s:arrString) {
             System.out.println(s);
         }
