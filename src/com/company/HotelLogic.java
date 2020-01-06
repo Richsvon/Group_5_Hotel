@@ -1,10 +1,18 @@
 package com.company;
 
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HotelLogic {
     Scanner input = new Scanner(System.in);
+
+    /*to get the right path for the text file
+    Right click the text file in /src/com.company or make your own one
+    Copy path from it and paste it in pathname in File below.
+     */
+    File fileNameForArrString = new File("C:\\Users\\TimJo\\IdeaProjects\\Group_5_Hotel\\src\\com\\company\\textFile.txt");
 
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Booking> bookings = new ArrayList<>();
@@ -28,11 +36,36 @@ public class HotelLogic {
     }
 
     public void makeArrListToString() {
+        for (int i = 0; i < bookings.size(); i++){
+            String totalPrice = String.valueOf(bookings.get(i).getTotalPrice());
+            String checkInDate = String.valueOf(bookings.get(i).getCheckInDate());
+            String checkOutDate = String.valueOf(bookings.get(i).getCheckOutDate());
+            String rooms = String.valueOf(bookings.get(i).getRooms());
+            String customer = String.valueOf(bookings.get(i).getCustomer());
 
+            String allTheInfo = "Name: " + customer + ",\n" +
+                    "Has booked Room nr: " + rooms + ",\n" +
+                    "Between " + checkInDate + " -- " + checkOutDate + ",\n" +
+                    "Total cost: " + totalPrice;
+            arrString.add(allTheInfo);
+        }
+        bookings.removeAll(bookings);
     }
 
     public void arrStringToTextFile() {
+        try {
+            FileWriter fw = new FileWriter(fileNameForArrString);
+            Writer output = new BufferedWriter(fw);
+            for ( int i = 0; i < arrString.size(); i++){
+                output.write(arrString.get(i) + "\n");
+            }
+            output.close();
+            arrString.removeAll(arrString);
 
+        }catch (IOException e){
+            JOptionPane.showMessageDialog(null,"I can not create that file");
+            e.printStackTrace();
+        }
     }
 
     public void textFileToArrString () {
