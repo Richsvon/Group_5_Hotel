@@ -44,7 +44,7 @@ public class HotelLogic {
             String totalPrice = String.valueOf(arrBookingCopy.get(i).getTotalPrice());
             String checkInDate = String.valueOf(arrBookingCopy.get(i).getCheckInDate());
             String checkOutDate = String.valueOf(arrBookingCopy.get(i).getCheckOutDate());
-            String rooms = String.valueOf(arrBookingCopy.get(i).getRooms());
+            String rooms = String.valueOf(arrBookingCopy.get(i).getBookedRooms());
             String customer = String.valueOf(arrBookingCopy.get(i).getCustomer());
 
             String allTheInfo = "Info about: " + customer + ",\n" +

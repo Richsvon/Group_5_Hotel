@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class Booking {
-    private static int counter =  1;
+    private static int counter = 1;
     private final int bookingId;
     private double totalPrice;
     private int checkInDate;
@@ -22,6 +22,16 @@ public class Booking {
 
     public ArrayList<Room> getRooms() {
         return rooms;
+    }
+
+    public ArrayList<Room> getBookedRooms() {
+        ArrayList<Room> bookedRoomList = new ArrayList();
+        for (Room room : rooms) {
+            if (room.getisBooked()) {
+                bookedRoomList.add(room);
+            }
+        }
+        return bookedRoomList;
     }
 
     public void setRooms(ArrayList<Room> rooms) {
@@ -51,16 +61,18 @@ public class Booking {
     public void setCheckInDate(int checkInDate) {
         this.checkInDate = checkInDate;
     }
+
     public void setCheckOutDate(int checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
+
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
     @Override
     public String toString() {
-        return  "\nbookingId: " + bookingId +
+        return "\nbookingId: " + bookingId +
                 "\n totalPrice: " + totalPrice +
                 "\n checkInDate: " + checkInDate +
                 "\n checkOutDate: " + checkOutDate +
