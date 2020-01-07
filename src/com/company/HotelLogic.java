@@ -172,6 +172,30 @@ public class HotelLogic {
     }
 
     public void viewCustomerHistory() {
+        System.out.println("Print a specific customer");
+        System.out.println("-----------------------------------------------");
+
+        System.out.println("enter ssn");
+        int m;
+        m = input.nextInt();
+
+        for (int i = 0; i < customers.size(); i++) {
+            //System.out.println("Enter social security number " + customers.get(i).getSocialSecurityNumber());
+            //m = input.nextInt();
+            customers.get(i).getSocialSecurityNumber();
+            String ssn = customers.get(i).getSocialSecurityNumber();
+            if (ssn.equals(String.valueOf(m))){
+                System.out.println("Social security number: " + customers.get(i).getSocialSecurityNumber());
+                System.out.println("Name: " + customers.get(i).getName());
+            System.out.println("Address: " + customers.get(i).getAddress());
+           System.out.println("Telephone: " + customers.get(i).getTelephoneNumber());
+           System.out.println("-----------------------------------------------");
+            }
+        }
+
+
+
+
 
     }
 

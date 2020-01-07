@@ -121,5 +121,6 @@ public class HotelApp {
         System.out.println("------------------------------------------------");
         System.out.println("16: Exit!");
         System.out.println("------------------------------------------------");
+
     }
 }
