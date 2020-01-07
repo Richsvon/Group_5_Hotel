@@ -130,9 +130,9 @@ public class HotelApp {
                         System.out.println("invalid input, 1-5");
                         break;
                 }//end switch
+                H.arrStringToTextFile();
+                H.textFileToArrString();
             }//end while customer
-            H.arrStringToTextFile();
-            H.textFileToArrString();
         }//end while checkExit
     }//end runProgram
 }//end class

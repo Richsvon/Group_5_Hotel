@@ -40,7 +40,7 @@ public class HotelLogic {
 
     public void makeArrListToString() {
         arrBookingCopy.addAll(bookings);
-        for (int i = 0; i < bookings.size(); i++){
+        for (int i = 0; i < bookings.size(); i++) {
             String totalPrice = String.valueOf(arrBookingCopy.get(i).getTotalPrice());
             String checkInDate = String.valueOf(arrBookingCopy.get(i).getCheckInDate());
             String checkOutDate = String.valueOf(arrBookingCopy.get(i).getCheckOutDate());
@@ -51,7 +51,7 @@ public class HotelLogic {
                     "Has booked Room nr: " + rooms + ",\n" +
                     "Between " + checkInDate + " -- " + checkOutDate + ",\n" +
                     "Total cost: " + totalPrice + "\n" +
-                    "---------------------------------------------------------------------------------";
+                    "--------------------------------------------------------------------------------------";
             arrString.add(allTheInfo);
         }
         arrBookingCopy.removeAll(arrBookingCopy);
@@ -61,7 +61,7 @@ public class HotelLogic {
         try {
             FileWriter fw = new FileWriter(fileNameForArrString);
             Writer output = new BufferedWriter(fw);
-            for ( int i = 0; i < arrString.size(); i++){
+            for (int i = 0; i < arrString.size(); i++) {
                 output.write(arrString.get(i) + "\n");
             }
             output.close();
@@ -69,32 +69,32 @@ public class HotelLogic {
 
             textFileToArrString();
 
-        }catch (IOException e){
-            JOptionPane.showMessageDialog(null,"I can not create that file");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "I can not create that file");
             e.printStackTrace();
         }
     }
 
-    public void textFileToArrString () {
+    public void textFileToArrString() {
         try {
             String line;
             BufferedReader in = new BufferedReader(new FileReader(fileNameForArrString));
-            if (!in.ready()){
-                throw new  IOException();
+            if (!in.ready()) {
+                throw new IOException();
             }
-            while ((line = in.readLine()) != null){
+            while ((line = in.readLine()) != null) {
                 arrString.add(line);
             }
             in.close();
 
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("ERROR Something went wrong");
         }
     }
 
-    public void viewTextFiles () {
+    public void viewTextFiles() {
         System.out.println("From string array");
-        for (String s:arrString) {
+        for (String s : arrString) {
             System.out.println(s);
         }
     }
@@ -268,33 +268,14 @@ public class HotelLogic {
         System.out.println("Enter Booking ID: ");
         int bookingId = input.nextInt();
         bookingId--;
+
+        bookings.get(bookingId).getBookedRooms();
         //int bookingIndex;
-        Booking temp;
 
         System.out.println(bookings.get(bookingId));
         input.nextLine();
 
-        for (int i = 0; i < bookings.size(); i++) {
-            temp = bookings.get(i);
-            //go through the booking room is booked and change it all to true
-            if (bookings.get(i).getBookingId() == bookingId) {
-                temp.getRooms().get(i).getisBooked();
 
-                while (!temp.getRooms().get(i).getisBooked()) {
-                    temp.getRooms().get(i).setisBooked(true);
-                    if (temp.getRooms().get(i).getisBooked()) {
-                        i++;
-                    }
-                }
-                System.out.println(temp.getRooms());
-
-
-                //bookingIndex = i;
-                //rooms.get(bookingIndex).setisBooked(true);
-                //System.out.println(customers.get(bookingId) + "\n" +
-                //bookings.get(bookingIndex));
-            }
-        }
     }
 
     public void checkOut() {
