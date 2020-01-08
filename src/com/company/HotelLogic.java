@@ -154,7 +154,7 @@ public class HotelLogic {
         System.out.println("enter booking ID");
         int m;
         m = input.nextInt();
-        //(ID.equals(String.valueOf(m)))
+
         for (int i = 0; i < bookings.size(); i++) {
             //System.out.println("Enter social security number " + customers.get(i).getSocialSecurityNumber());
             //m = input.nextInt();
@@ -166,6 +166,29 @@ public class HotelLogic {
                 System.out.println("Total price: " + bookings.get(i).getTotalPrice());
                 System.out.println("Check in: " + bookings.get(i).getCheckInDate());
                 System.out.println("Check out: " + bookings.get(i).getCheckOutDate());
+                System.out.println("-----------------------------------------------");
+            }
+        }
+
+        System.out.println("Search for room");
+        System.out.println("-----------------------------------------------");
+
+        System.out.println("enter room number");
+        int n;
+        n = input.nextInt();
+
+        for (int i = 0; i < rooms.size(); i++) {
+            //System.out.println("Enter social security number " + customers.get(i).getSocialSecurityNumber());
+            //m = input.nextInt();
+            rooms.get(i).getRoomNumber();
+            int room = rooms.get(i).getRoomNumber();
+            if (room == n)
+            {
+                System.out.println("Room number: " + rooms.get(i).getRoomNumber());
+                System.out.println("Number of beds: " + rooms.get(i).getRoomNumber());
+                System.out.println("Balcony : " + rooms.get(i).getRoomNumber());
+                System.out.println("Price per night: " + rooms.get(i).getRoomNumber());
+                System.out.println("Is the room booked: " + rooms.get(i).getRoomNumber());
                 System.out.println("-----------------------------------------------");
             }
         }
@@ -337,8 +360,6 @@ public class HotelLogic {
            System.out.println("-----------------------------------------------");
             }
         }
-
-
 
 
 
