@@ -148,7 +148,27 @@ public class HotelLogic {
     }
 
     public void searchForBooking() {
+        System.out.println("Print a specific customer");
+        System.out.println("-----------------------------------------------");
 
+        System.out.println("enter booking ID");
+        int m;
+        m = input.nextInt();
+        //(ID.equals(String.valueOf(m)))
+        for (int i = 0; i < bookings.size(); i++) {
+            //System.out.println("Enter social security number " + customers.get(i).getSocialSecurityNumber());
+            //m = input.nextInt();
+            bookings.get(i).getBookingId();
+            int ID = bookings.get(i).getBookingId();
+            if (ID == m)
+            {
+                System.out.println("BookingId " + bookings.get(i).getBookingId());
+                System.out.println("Total price: " + bookings.get(i).getTotalPrice());
+                System.out.println("Check in: " + bookings.get(i).getCheckInDate());
+                System.out.println("Check out: " + bookings.get(i).getCheckOutDate());
+                System.out.println("-----------------------------------------------");
+            }
+        }
     }
 
     public void viewCustomers() {
@@ -351,6 +371,9 @@ public class HotelLogic {
             System.out.print("Current Check Out: " + bookings.get(index).getCheckInDate() + "\nNew Check Out: ");
             int checkOutDate = input.nextInt();
             bookings.get(index).setCheckOutDate(checkOutDate);
+
+            System.out.println("\nNew Check In: " + checkInDate);
+            System.out.println("\nNew Check Out: " + checkOutDate);
 
 
             // Customer får inte ändra på dessa features
