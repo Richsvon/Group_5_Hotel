@@ -6,32 +6,18 @@ public class Booking {
     private static int counter = 1;
     private final int bookingId;
     private double totalPrice;
-    private int checkInDate;
-    private int checkOutDate;
     private ArrayList<Room> rooms;
     private Customer customer;
 
-    public Booking(double totalPrice, int checkInDate, int checkOutDate, ArrayList<Room> rooms, Customer customer) {
+    public Booking(double totalPrice, ArrayList<Room> rooms, Customer customer) {
         this.bookingId = counter++;
         this.totalPrice = totalPrice;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
         this.rooms = rooms;
         this.customer = customer;
     }
 
     public ArrayList<Room> getRooms() {
         return rooms;
-    }
-
-    public ArrayList<Room> getBookedRooms() {
-        ArrayList<Room> bookedRoomList = new ArrayList();
-        for (Room room : rooms) {
-            if (room.getisBooked()) {
-                bookedRoomList.add(room);
-            }
-        }
-        return bookedRoomList;
     }
 
     public void setRooms(ArrayList<Room> rooms) {
@@ -50,34 +36,16 @@ public class Booking {
         return totalPrice;
     }
 
-    public int getCheckInDate() {
-        return checkInDate;
-    }
-
-    public int getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckInDate(int checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public void setCheckOutDate(int checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
     @Override
     public String toString() {
-        return "\nbookingId: " + bookingId +
+        return  "\n bookingId: " + bookingId +
                 "\n totalPrice: " + totalPrice +
-                "\n checkInDate: " + checkInDate +
-                "\n checkOutDate: " + checkOutDate +
                 "\n rooms: " + rooms +
                 "\n customer: " + customer +
-                "\n------------------------------------- \n";
+                "\n-------------------------------------";
     }
 }

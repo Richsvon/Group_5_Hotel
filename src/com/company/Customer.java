@@ -47,12 +47,11 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "socialSecurityNumber='" + socialSecurityNumber + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", telephoneNumber='" + telephoneNumber + '\'' +
-                '}';
+        return  "\n SocialSecurityNumber: " + socialSecurityNumber +
+                "\n Name: " + name +
+                "\n Address: " + address +
+                "\n Telephone number: " + telephoneNumber +
+                "\n -------------------------------------";
     }
 }
 

@@ -3,8 +3,8 @@ package com.company;
 import java.util.Scanner;
 
 public class HotelApp {
-    Scanner input = new Scanner(System.in);
-    HotelLogic H = new HotelLogic();
+    private Scanner input = new Scanner(System.in);
+    private HotelLogic H = new HotelLogic();
 
     public static void main(String[] args) {
         HotelApp myApp = new HotelApp();
@@ -16,13 +16,16 @@ public class HotelApp {
         H.makeArrListToString();
         H.arrStringToTextFile();
 
-        int customerIndex = -1;
+        int customerIndex=-1;
         boolean checkExit = true;
         int choice;
         boolean employee = false;
         boolean customer = false;
+
         while (checkExit) {
-            System.out.println("Log in as 1. employee or 2. customer or 3. for exit");
+            System.out.println("---- Hello and Welcome to our Hotel Application ----");
+            System.out.println("------------------------------------------------");
+            System.out.println("Log in as \n 1: Employee \n 2: Customer \n 3: Exit");
             choice = Integer.parseInt(input.nextLine());
             switch (choice) {
                 case 1:
@@ -83,25 +86,28 @@ public class HotelApp {
                         H.makeBooking(customerIndex);
                         break;
                     case 11:
-                        H.checkIn();
+                        H.checkIn(customerIndex);
                         break;
                     case 12:
-                        H.checkOut();
+                        H.checkOut(customerIndex);
                         break;
                     case 13:
-                        H.viewCustomerHistory();
+                        H.viewBookingHistory(customerIndex);
                         break;
                     case 14:
                         H.editBooking();
                         break;
                     case 15:
-                        H.editCustomer();
+                        H.editProfile(customerIndex);
                         break;
                     case 16:
+                        H.cancelBooking(customerIndex);
+                        break;
+                    case 17:
                         employee = false;
                         break;
                     default:
-                        System.out.println("Invalid input, 1-16");
+                        System.out.println("Invalid input, 1-17");
                         break;
                 }//end switch
             }//end while employee
@@ -112,7 +118,7 @@ public class HotelApp {
                 choice = Integer.parseInt(input.nextLine());
                 switch (choice) {
                     case 1:
-                        H.viewAvailableRoomsByDate();
+                        H.viewAvailableRooms();
                         break;
                     case 2:
                         H.viewBookingHistory(customerIndex);
@@ -124,10 +130,19 @@ public class HotelApp {
                         H.editProfile(customerIndex);
                         break;
                     case 5:
+                        H.checkIn(customerIndex);
+                        break;
+                    case 6:
+                        H.checkOut(customerIndex);
+                        break;
+                    case 7:
+                        H.cancelBooking(customerIndex);
+                        break;
+                    case 8:
                         customer = false;
                         break;
                     default:
-                        System.out.println("invalid input, 1-5");
+                        System.out.println("Invalid input, 1-8");
                         break;
                 }//end switch
                 H.arrStringToTextFile();

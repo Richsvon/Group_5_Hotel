@@ -12,7 +12,7 @@ public class Room {
         this.setNumberOfBeds(numberOfBeds);
         this.setHasBalcony(hasBalcony);
         this.setPricePerNight(pricePerNight);
-        this.setisBooked(isBooked);
+        this.setIsBooked(isBooked);
     }
 
     public void setRoomNumber (int roomNumber) {
@@ -47,23 +47,22 @@ public class Room {
         return pricePerNight;
     }
 
-    public void setisBooked (boolean isBooked)  {
+    public void setIsBooked (boolean isBooked)  {
         this.isBooked = isBooked;
     }
 
-    public boolean getisBooked ()   {
+    public boolean getIsBooked ()   {
         return isBooked;
     }
 
     @Override
     public String toString() {
-        return "Room " +
-                "\nRoom number: " + roomNumber +
+        return  "\nRoom number: " + roomNumber +
                 "\nNumber of beds: " + numberOfBeds +
                 "\nBalcony: " + hasBalcony +
                 "\nPrice per night: " + pricePerNight +
                 "\nRoom booked: " + isBooked +
-                "\n------------------------------------- \n";
+                "\n-------------------------------------";
 
     }
 }

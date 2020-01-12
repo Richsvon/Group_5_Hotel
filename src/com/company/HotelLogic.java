@@ -6,35 +6,33 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HotelLogic {
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
+    private ArrayList<Room> rooms = new ArrayList<>();
+    private ArrayList<Booking> bookings = new ArrayList<>();
+    private ArrayList<Customer> customers = new ArrayList<>();
 
     /*to get the right path for the text file
     Right click the text file in /src/com.company or make your own one
     Copy path from it and paste it in pathname in File below.
      */
-    File fileNameForArrString = new File("C:\\Users\\TimJo\\IdeaProjects\\Group_5_Hotel\\src\\com\\company\\textFile.txt");
+    private File fileNameForArrString = new File("C:\\Users\\TimJo\\IdeaProjects\\Group_5_Hotel\\src\\com\\company\\textFile.txt");
 
-    private ArrayList<Room> rooms = new ArrayList<>();
-    private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Booking> arrBookingCopy = new ArrayList<>();
-    private ArrayList<Customer> customers = new ArrayList<>();
-
     private ArrayList<String> arrString = new ArrayList<>();
 
     public void addTestObjects() {
-        //lägger till 3 rum och 3 customers för att kunna testa metoder.
         rooms.add(new Room(1, 1, false, 99, false));
-        rooms.add(new Room(2, 2, false, 99, true));
+        rooms.add(new Room(2, 2, false, 99, false));
         rooms.add(new Room(3, 3, true, 99, false));
 
-        customers.add(new Customer("11", "Richard", "vägen11", "0701111"));
-        customers.add(new Customer("22", "Tim", "vägen22", "0702222"));
-        customers.add(new Customer("33", "Jesper", "vägen33", "0703333"));
-        customers.add(new Customer("44", "Achmaad", "vägen44", "0704444"));
+        customers.add(new Customer("9801010000", "Richard", "vägen11", "0701111"));
+        customers.add(new Customer("9801020000", "Tim", "vägen22", "0702222"));
+        customers.add(new Customer("9801030000", "Jesper", "vägen33", "0703333"));
+        customers.add(new Customer("9801040000", "Achmaad", "vägen44", "0704444"));
 
-        bookings.add(new Booking(99, 191201, 191205, rooms, customers.get(0)));
-        bookings.add(new Booking(199, 191206, 191209, rooms, customers.get(1)));
-        bookings.add(new Booking(150, 191213, 191226, rooms, customers.get(2)));
+        bookings.add(new Booking(99, rooms, customers.get(0)));
+        bookings.add(new Booking(199, rooms, customers.get(1)));
+        bookings.add(new Booking(150, rooms, customers.get(2)));
     }
 
 
@@ -42,14 +40,11 @@ public class HotelLogic {
         arrBookingCopy.addAll(bookings);
         for (int i = 0; i < bookings.size(); i++) {
             String totalPrice = String.valueOf(arrBookingCopy.get(i).getTotalPrice());
-            String checkInDate = String.valueOf(arrBookingCopy.get(i).getCheckInDate());
-            String checkOutDate = String.valueOf(arrBookingCopy.get(i).getCheckOutDate());
-            String rooms = String.valueOf(arrBookingCopy.get(i).getBookedRooms());
+            String rooms = String.valueOf(arrBookingCopy.get(i).getRooms());
             String customer = String.valueOf(arrBookingCopy.get(i).getCustomer());
 
             String allTheInfo = "Info about: " + customer + ",\n" +
                     "Has booked Room nr: " + rooms + ",\n" +
-                    "Between " + checkInDate + " -- " + checkOutDate + ",\n" +
                     "Total cost: " + totalPrice + "\n" +
                     "--------------------------------------------------------------------------------------";
             arrString.add(allTheInfo);
@@ -115,18 +110,28 @@ public class HotelLogic {
         boolean logIn = true;
         int index = -1;
         while (logIn) {
-            System.out.println("Do you have an account press 1, 2 to create a new and 3 to exit");
+            System.out.println("\n 1: Already a customer \n 2: Become a customer \n 3: Exit");
             int choice = Integer.parseInt(input.nextLine());
             switch (choice) {
                 case 1:
                     System.out.println("Enter your name");
                     String name = input.nextLine();
-                    System.out.println("Enter your SSN ");
-                    String SSN = input.nextLine();
+
+                    String SSN = "";
+                    while (SSN.length() != 10) {
+                        System.out.println("Enter your SSN ");
+                        SSN = input.nextLine();
+                        if (SSN.length() != 10) {
+                            System.out.println("SSN should be in format (YYMMDDXXXX");
+                        }
+                    }
+
                     for (int i = 0; i < customers.size(); i++) {
-                        if (customers.get(i).getName().equalsIgnoreCase(name) && customers.get(i).getSocialSecurityNumber().equals(SSN)) {
+                        if (customers.get(i).getName().equalsIgnoreCase(name) &&
+                                customers.get(i).getSocialSecurityNumber().equals(SSN)) {
                             index = i;
-                            System.out.println("You are now logged in as " + customers.get(i).getName() + " with the SSN " + customers.get(i).getSocialSecurityNumber());
+                            System.out.println("You are now logged in as " + customers.get(i).getName() +
+                                    " with the SSN " + customers.get(i).getSocialSecurityNumber());
                             logIn = false;
                         }
                     }
@@ -134,13 +139,14 @@ public class HotelLogic {
                         System.out.println("There is no such customer");
                     }
                     break;
+
                 case 2:
                     addCustomer();
                     break;
                 case 3:
                     return index;
                 default:
-                    System.out.println("invalid input, 1 or 2");
+                    System.out.println("invalid input, 1-3");
                     break;
             }
         }
@@ -148,48 +154,18 @@ public class HotelLogic {
     }
 
     public void searchForBooking() {
-        System.out.println("Print a specific customer");
-        System.out.println("-----------------------------------------------");
-
-        System.out.println("enter booking ID");
-        int m;
-        m = input.nextInt();
-
-        for (int i = 0; i < bookings.size(); i++) {
-            //System.out.println("Enter social security number " + customers.get(i).getSocialSecurityNumber());
-            //m = input.nextInt();
-            bookings.get(i).getBookingId();
-            int ID = bookings.get(i).getBookingId();
-            if (ID == m)
-            {
-                System.out.println("BookingId " + bookings.get(i).getBookingId());
-                System.out.println("Total price: " + bookings.get(i).getTotalPrice());
-                System.out.println("Check in: " + bookings.get(i).getCheckInDate());
-                System.out.println("Check out: " + bookings.get(i).getCheckOutDate());
-                System.out.println("-----------------------------------------------");
+        int maxBookID = bookings.size();
+        int bookingID = 0;
+        while (bookingID < 1 || bookingID > maxBookID) {
+            System.out.println("Enter booking ID");
+            bookingID = Integer.parseInt(input.nextLine());
+            if (bookingID < 1 || bookingID > maxBookID) {
+                System.out.println("Booking ID must be between 1 and " + maxBookID + ".");
             }
         }
-
-        System.out.println("Search for room");
-        System.out.println("-----------------------------------------------");
-
-        System.out.println("enter room number");
-        int n;
-        n = input.nextInt();
-
-        for (int i = 0; i < rooms.size(); i++) {
-            //System.out.println("Enter social security number " + customers.get(i).getSocialSecurityNumber());
-            //m = input.nextInt();
-            rooms.get(i).getRoomNumber();
-            int room = rooms.get(i).getRoomNumber();
-            if (room == n)
-            {
-                System.out.println("Room number: " + rooms.get(i).getRoomNumber());
-                System.out.println("Number of beds: " + rooms.get(i).getRoomNumber());
-                System.out.println("Balcony : " + rooms.get(i).getRoomNumber());
-                System.out.println("Price per night: " + rooms.get(i).getRoomNumber());
-                System.out.println("Is the room booked: " + rooms.get(i).getRoomNumber());
-                System.out.println("-----------------------------------------------");
+        for (int i = 0; i < bookings.size(); i++) {
+            if (bookings.get(i).getBookingId() == bookingID) {
+                System.out.println(bookings.get(i));
             }
         }
     }
@@ -197,7 +173,6 @@ public class HotelLogic {
     public void viewCustomers() {
         System.out.println("Printing a list of all customers");
         System.out.println("-----------------------------------------------");
-
         for (int i = 0; i < customers.size(); i++) {
             System.out.println("Social security number: " + customers.get(i).getSocialSecurityNumber());
             System.out.println("Name: " + customers.get(i).getName());
@@ -212,38 +187,69 @@ public class HotelLogic {
         System.out.println("-----------------------------------------------");
         for (int i = 0; i < rooms.size(); i++) {
             System.out.println("Room number: " + rooms.get(i).getRoomNumber());
-            System.out.println("Number of beds: " + rooms.get(i).getRoomNumber());
-            System.out.println("Balcony : " + rooms.get(i).getRoomNumber());
-            System.out.println("Price per night: " + rooms.get(i).getRoomNumber());
-            System.out.println("Is the room booked: " + rooms.get(i).getRoomNumber());
+            System.out.println("Number of beds: " + rooms.get(i).getNumberOfBeds());
+            System.out.println("Balcony : " + rooms.get(i).getHasBalcony());
+            System.out.println("Price per night: " + rooms.get(i).getPricePerNight());
+            System.out.println("Is the room booked: " + rooms.get(i).getIsBooked());
             System.out.println("-----------------------------------------------");
         }
 
     }
 
     public void removeRoom() {
-        System.out.println("Enter the room number of the room you would like to remove:");
-        int roomNumber = Integer.parseInt(input.nextLine());
+        viewRooms();
+        boolean remove = true;
+        while (remove) {
+            int roomNumber = 0;
+            while (roomNumber < 1) {
+                System.out.print("Room number: ");
+                roomNumber = Integer.parseInt(input.nextLine());
+                if (roomNumber < 1) {
+                    System.out.println("Room number must be a positive number!");
+                }
+            }
 
-        for (int i = 0; i < rooms.size(); i++) {
-            if (rooms.get(i).getRoomNumber() == roomNumber) {
-                rooms.remove(i);
-                System.out.println("Room was successfully removed");
+            for (int i = 0; i < rooms.size(); i++) {
+                if (rooms.get(i).getRoomNumber() == roomNumber) {
+                    rooms.remove(i);
+                    System.out.println("Room was successfully removed");
+                    remove = false;
+                }
+            }
+            if (remove) {
+                System.out.println("The room number does not exist");
             }
         }
-
     }
 
     public void removeCustomer() {
-        System.out.println("Enter the name of the customer you would like to remove:");
-        String name = input.nextLine();
+        boolean match = true;
+        while (match) {
+            System.out.println("Enter the name of the customer you would like to remove:");
+            String name = input.nextLine();
 
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getName().equals(name)) {
-                customers.remove(i);
-                System.out.println("Customer was successfully removed");
+            String SSN = "";
+            while (SSN.length() != 10) {
+                System.out.println("Enter the SSN of the customer.");
+                SSN = input.nextLine();
+                if (SSN.length() != 10) {
+                    System.out.println("SSN should be in format (YYMMDDXXXX)");
+                }
+            }
+
+            for (int i = 0; i < customers.size(); i++) {
+                if (customers.get(i).getName().equalsIgnoreCase(name)
+                        && customers.get(i).getSocialSecurityNumber().equals(SSN)) {
+                    customers.remove(i);
+                    System.out.println("Customer was successfully removed");
+                    match = false;
+                }
+            }
+            if (match) {
+                System.out.println("There is no customer with that name and SSN.");
             }
         }
+        System.out.println();
     }
 
     public void viewBookings() {
@@ -253,90 +259,151 @@ public class HotelLogic {
     }
 
     public void makeBooking(int customerIndex) {
+        if (customerIndex == -1) {
+            customerIndex = correctSSN();
+        }
+
         double totalPrice = 0;
         ArrayList<Room> roomsToBook = new ArrayList<>();
-        if (customerIndex == -1) {
-            System.out.println("Enter the SSN of the customer that is making the booking (YYMMDDXXXX");
-            String SSN = input.nextLine();
-            for (int i = 0; i < customers.size(); i++) {
-                if (customers.get(i).getSocialSecurityNumber().equalsIgnoreCase(SSN)) {
-                    customerIndex = i;
-                }
+
+        int numberOfRooms = 0;
+        while (numberOfRooms < 1) {
+            System.out.println("How many rooms do you want to book");
+            numberOfRooms = Integer.parseInt(input.nextLine());
+            if (numberOfRooms < 1) {
+                System.out.println("You must book atleast one room.");
             }
         }
 
-        System.out.println("How many rooms do you want to book");
-        int numberOfRooms = Integer.parseInt(input.nextLine());
-
-        System.out.println("Enter check in date: (format YYMMDD");
-        int checkInDate = Integer.parseInt(input.nextLine());
-
-        System.out.println("Enter check out date: (format YYMMDD");
-        int checkOutDate = Integer.parseInt(input.nextLine());
-
-        int numberOfNights = checkOutDate - checkInDate;
+        int numberOfNights = 0;
+        while (numberOfNights < 1) {
+            System.out.println("How many nights do you want to book?");
+            numberOfNights = Integer.parseInt(input.nextLine());
+            if (numberOfNights < 1) {
+                System.out.println("You must book atleast one night.");
+            }
+        }
 
         for (int i = 0; i < numberOfRooms; i++) {
-            int roomIndex = 0;
-            viewAvailableRooms();
-            System.out.println("Enter the roomnumber of the room you want to book");
-            int roomNumber = Integer.parseInt(input.nextLine());
-            for (int j = 0; j < rooms.size(); j++) {
-                if (rooms.get(i).getRoomNumber() == roomNumber) {
-                    roomIndex = j;
+            int roomIndex = -1;
+            while (roomIndex == -1) {
+                viewAvailableRooms();
+                System.out.println("Enter the room number of the room you want to book!");
+                int roomNumber = Integer.parseInt(input.nextLine());
+                for (int j = 0; j < rooms.size(); j++) {
+                    if (rooms.get(i).getRoomNumber() == roomNumber) {
+                        roomIndex = j;
+                    }
                 }
-
+                if (roomIndex == -1) {
+                    System.out.println("That room number does not exist");
+                }
             }
             totalPrice = totalPrice + (rooms.get(roomIndex).getPricePerNight() * numberOfNights);
             roomsToBook.add(rooms.get(roomIndex));
         }
-        bookings.add(new Booking(totalPrice, checkInDate, checkOutDate, roomsToBook, customers.get(customerIndex)));
-        viewBookings();
+        bookings.add(new Booking(totalPrice, roomsToBook, customers.get(customerIndex)));
+        System.out.println("Booking was made successfully!");
     }
 
-    public void checkIn() {
-        //ask for ssn
-        //step 2
-        System.out.println(bookings.get(1).getCustomer());
-        System.out.println("enter your ssn");
-        String ssn = input.nextLine();
-        for (int i = 0; i < bookings.size(); i++) {
-
-            if (bookings.get(i).getCustomer().getSocialSecurityNumber().equals(ssn)) {
-                break;
+    public void checkIn(int customerIndex) {
+        if (customerIndex == -1) {
+            customerIndex = correctSSN();
+        }
+        int bookingID = 0;
+        int bookingIndex = -1;
+        while (bookingIndex == -1) {
+            while (bookingID < 1) {
+                System.out.println("Enter your bookingID");
+                bookingID = Integer.parseInt(input.nextLine());
+                if (bookingID < 1) {
+                    System.out.println("You booking ID must be a positive number");
+                }
+            }
+            for (int i = 0; i < bookings.size(); i++) {
+                if (bookings.get(i).getBookingId() == bookingID) {
+                    bookingIndex = i;
+                }
+            }
+            if (bookingIndex < 0) {
+                System.out.println("The booking ID does not exist!");
+                bookingID = 0;
+            } else if (bookings.get(bookingIndex).getCustomer().getSocialSecurityNumber().equals(customers.get(customerIndex).getSocialSecurityNumber())) {
+                System.out.println(bookings.get(bookingIndex));
+                System.out.println("Is this the correct booking information? \n 1: Yes \n 2: No");
+                int correct = Integer.parseInt(input.nextLine());
+                switch (correct) {
+                    case 1:
+                        ArrayList<Room> roomsCheckIn = bookings.get(bookingIndex).getRooms();
+                        for (int i = 0; i < roomsCheckIn.size(); i++) {
+                            roomsCheckIn.get(i).setIsBooked(true);
+                        }
+                        System.out.println("Check in was made successfully!");
+                        break;
+                    case 2:
+                        bookingIndex = -1;
+                        bookingID = 0;
+                        break;
+                    default:
+                        System.out.println("Invalid input, 1 or 2!");
+                        break;
+                }
+            } else {
+                System.out.println("The booking id and the customer does not match");
+                bookingIndex = -1;
+                bookingID = 0;
             }
         }
-        //---------------------------------------------------------------------------------------------
-        //witch booking id?
-        System.out.println("Enter Booking ID: ");
-        int bookingId = input.nextInt();
-        bookingId--;
-
-        bookings.get(bookingId).getBookedRooms();
-        //int bookingIndex;
-
-        System.out.println(bookings.get(bookingId));
-        input.nextLine();
-
-
     }
 
-    public void checkOut() {
-        System.out.println("Enter customers ID");
-        int bookingId = input.nextInt();
-        int bookingIndex = 0;
-        System.out.println(bookings.get(bookingIndex + 1));
-        input.nextLine();
-
-        for (int i = 0; i < bookings.size(); i++) {
-
-            if (bookings.get(i).getBookingId() == bookingId) {
-                bookingIndex = i;
-                System.out.println(customers.get(bookingId));
+    public void checkOut(int customerIndex) {
+        if (customerIndex == -1) {
+            customerIndex = correctSSN();
+        }
+        int bookingID = 0;
+        int bookingIndex = -1;
+        while (bookingIndex == -1) {
+            while (bookingID < 1) {
+                System.out.println("Enter your bookingID");
+                bookingID = Integer.parseInt(input.nextLine());
+                if (bookingID < 1) {
+                    System.out.println("You booking ID must be a positive number");
+                }
+            }
+            for (int i = 0; i < bookings.size(); i++) {
+                if (bookings.get(i).getBookingId() == bookingID) {
+                    bookingIndex = i;
+                }
+            }
+            if (bookingIndex < 0) {
+                System.out.println("The booking ID does not exist!");
+                bookingID = 0;
+            } else if (bookings.get(bookingIndex).getCustomer().getSocialSecurityNumber().equals(customers.get(customerIndex).getSocialSecurityNumber())) {
+                System.out.println(bookings.get(bookingIndex));
+                System.out.println("Is this the correct booking information? \n 1: Yes \n 2: No");
+                int correct = Integer.parseInt(input.nextLine());
+                switch (correct) {
+                    case 1:
+                        ArrayList<Room> roomsCheckIn = bookings.get(bookingIndex).getRooms();
+                        for (int i = 0; i < roomsCheckIn.size(); i++) {
+                            roomsCheckIn.get(i).setIsBooked(false);
+                        }
+                        System.out.println("Check out was made successfully!");
+                        break;
+                    case 2:
+                        bookingIndex = -1;
+                        bookingID = 0;
+                        break;
+                    default:
+                        System.out.println("Invalid input, 1 or 2!");
+                        break;
+                }
+            } else {
+                System.out.println("The booking id and the customer does not match");
+                bookingIndex = -1;
+                bookingID = 0;
             }
         }
-        rooms.get(bookingIndex).setisBooked(false);
-        System.out.println(bookings.get(bookingIndex));
     }
 
     public void viewCustomerHistory() {
@@ -352,15 +419,14 @@ public class HotelLogic {
             //m = input.nextInt();
             customers.get(i).getSocialSecurityNumber();
             String ssn = customers.get(i).getSocialSecurityNumber();
-            if (ssn.equals(String.valueOf(m))){
+            if (ssn.equals(String.valueOf(m))) {
                 System.out.println("Social security number: " + customers.get(i).getSocialSecurityNumber());
                 System.out.println("Name: " + customers.get(i).getName());
-            System.out.println("Address: " + customers.get(i).getAddress());
-           System.out.println("Telephone: " + customers.get(i).getTelephoneNumber());
-           System.out.println("-----------------------------------------------");
+                System.out.println("Address: " + customers.get(i).getAddress());
+                System.out.println("Telephone: " + customers.get(i).getTelephoneNumber());
+                System.out.println("-----------------------------------------------");
             }
         }
-
 
 
     }
@@ -370,8 +436,6 @@ public class HotelLogic {
             System.out.println("Index (" + i + ")");
             System.out.println("BookingId " + bookings.get(i).getBookingId());
             System.out.println("Total price: " + bookings.get(i).getTotalPrice());
-            System.out.println("Check in: " + bookings.get(i).getCheckInDate());
-            System.out.println("Check out: " + bookings.get(i).getCheckOutDate());
             System.out.println("-----------------------------------------------");
 
             System.out.println("Enter the index of the booking you want to change: ");
@@ -380,22 +444,7 @@ public class HotelLogic {
             System.out.println("------------ Current customer info ------------");
             System.out.println("BookingId " + bookings.get(index).getBookingId());
             System.out.println("Total price: " + bookings.get(index).getTotalPrice());
-
-            System.out.println("Check in: " + bookings.get(index).getCheckInDate());
-            System.out.println("Check out: " + bookings.get(index).getCheckOutDate());
             System.out.println("-----------------------------------------------");
-
-            System.out.print("Current Check In: " + bookings.get(index).getCheckInDate() + "\nNew Check In: ");
-            int checkInDate = input.nextInt();
-            bookings.get(index).setCheckInDate(checkInDate);
-
-            System.out.print("Current Check Out: " + bookings.get(index).getCheckInDate() + "\nNew Check Out: ");
-            int checkOutDate = input.nextInt();
-            bookings.get(index).setCheckOutDate(checkOutDate);
-
-            System.out.println("\nNew Check In: " + checkInDate);
-            System.out.println("\nNew Check Out: " + checkOutDate);
-
 
             // Customer får inte ändra på dessa features
 
@@ -427,7 +476,8 @@ public class HotelLogic {
         System.out.println("-----------------------------------------------");
 
 
-        System.out.print("Current social security number: " + customers.get(index).getSocialSecurityNumber() + "\nEnter a new social security number: ");
+        System.out.print("Current social security number: " + customers.get(index).getSocialSecurityNumber()
+                + "\nEnter a new social security number: ");
         String SocialSecurityNumber = input.nextLine();
         customers.get(index).setSocialSecurityNumber(SocialSecurityNumber);
 
@@ -445,40 +495,90 @@ public class HotelLogic {
     }
 
     public void addRoom() {
+        int roomNumber = 0;
+        boolean checkNumber = true;
+        while (checkNumber) {
+            while (roomNumber < 1) {
+                System.out.print("Room number: ");
+                roomNumber = Integer.parseInt(input.nextLine());
+                if (roomNumber < 1) {
+                    System.out.println("Room number must be a positive number!");
+                }
+            }
+            for (int i = 0; i < rooms.size(); i++) {
+                if (rooms.get(i).getRoomNumber() == roomNumber) {
+                    System.out.println("That room number already exists");
+                    roomNumber = 0;
+                }
+            }
+            if (roomNumber != 0) {
+                checkNumber = false;
+            }
+        }
+        int numberOfBeds = 0;
+        while (numberOfBeds < 1) {
+            System.out.print("Beds:  ");
+            numberOfBeds = Integer.parseInt(input.nextLine());
+            if (numberOfBeds < 1) {
+                System.out.println("There must be minimum 1 bed");
+            }
+        }
+        int balcony = 0;
+        boolean hasBalcony = false;
+        while (balcony < 1 || balcony > 2) {
+            System.out.println("Does the room have a balcony \n 1: Yes \n 2: No");
+            balcony = Integer.parseInt(input.nextLine());
+            switch (balcony) {
+                case 1:
+                    hasBalcony = true;
+                    break;
+                case 2:
+                    hasBalcony = false;
+                    break;
+                default:
+                    System.out.println("Invalid input, 1 or 2");
+            }
+        }
 
-        System.out.print("Room number: ");
-        int RoomNumber = Integer.parseInt(input.nextLine());
-        System.out.print("Beds:  ");
-        int NumberOfBeds = Integer.parseInt(input.nextLine());
-        System.out.print("Balcony ");
-        boolean HasBalcony = Boolean.parseBoolean(input.nextLine());
-        System.out.print("Price ");
-        double PricePerNight = Double.parseDouble(input.nextLine());
+        double pricePerNight = 0;
+        while (pricePerNight < 1) {
+            System.out.print("Price per night ");
+            pricePerNight = Double.parseDouble(input.nextLine());
+            if (pricePerNight < 1) {
+                System.out.println("The price must be a positive number!");
+            }
+        }
 
-        Room room = new Room(RoomNumber, NumberOfBeds, HasBalcony, PricePerNight, false);
-        rooms.add(room);
+        rooms.add(new Room(roomNumber, numberOfBeds, hasBalcony, pricePerNight, false));
+        System.out.println("Room was successfully added!");
     }
 
     public void addCustomer() {
+        String socialSecurityNumber = "";
+        while (socialSecurityNumber.length() != 10) {
+            System.out.println("Enter SSN: ");
+            socialSecurityNumber = input.nextLine();
+            if (socialSecurityNumber.length() != 10) {
+                System.out.println("SSN should be in format (YYMMDDXXXX)");
+            }
+        }
 
-        System.out.println("Enter SSN ");
-        String socialSecurityNumber = input.nextLine();
-
-        System.out.println("Enter Name ");
+        System.out.println("Enter Name: ");
         String name = input.nextLine();
 
-        System.out.println("Enter address ");
+        System.out.println("Enter Address: ");
         String address = input.nextLine();
 
-        System.out.println("Enter telephone number ");
+        System.out.println("Enter Telephone Number: ");
         String telephoneNumber = input.nextLine();
 
         customers.add(new Customer(socialSecurityNumber, name, address, telephoneNumber));
+        System.out.println("Customer was successfully added!");
     }
 
     public void viewAvailableRooms() {
         for (int i = 0; i < rooms.size(); i++) {
-            if (rooms.get(i).getisBooked() == false) {
+            if (rooms.get(i).getIsBooked() == false) {
                 System.out.println(rooms.get(i));
             }
         }
@@ -489,32 +589,84 @@ public class HotelLogic {
         for (int i = 0; i < rooms.size(); i++) {
             System.out.println("Room [" + i + "] " + rooms.get(i));
         }
-        while (edit) {
+        int highestIndex = rooms.size() - 1;
+        int index = -1;
+        while (index < 0 || index > highestIndex) {
             System.out.println("Enter the index of the room you want to change: ");
-            int index = Integer.parseInt(input.nextLine());
-            System.out.println("Current Room info: " + rooms.get(index));
+            index = Integer.parseInt(input.nextLine());
+            if (index < 0 || index > highestIndex) {
+                System.out.println("The index must be between 0 and " + highestIndex + ".");
+            }
+        }
+        System.out.println("Current Room info: " + rooms.get(index));
 
-            System.out.println("edit 1, room number 2, number of beds 3, balcony 4, price per night 5, to exit editing ");
+        while (edit) {
+            System.out.println("edit \n 1: Room number \n 2: Number of beds \n 3: Balcony \n 4: Price per night \n 5: Exit ");
             int choice = Integer.parseInt(input.nextLine());
             switch (choice) {
                 case 1:
-                    System.out.println("Current room number: " + rooms.get(index).getRoomNumber() + " New Room Number: ");
-                    int roomNumber = Integer.parseInt(input.nextLine());
+                    int roomNumber = 0;
+                    boolean checkNumber = true;
+                    while (checkNumber) {
+                        while (roomNumber < 1) {
+                            System.out.println("Current room number: " + rooms.get(index).getRoomNumber() + " New Room Number: ");
+                            roomNumber = Integer.parseInt(input.nextLine());
+                            if (roomNumber < 1) {
+                                System.out.println("Room number must be a positive number!");
+                            }
+                        }
+                        for (int i = 0; i < rooms.size(); i++) {
+                            if (rooms.get(i).getRoomNumber() == roomNumber) {
+                                System.out.println("That room number already exists");
+                                roomNumber = 0;
+                            }
+                        }
+                        if (roomNumber != 0) {
+                            checkNumber = false;
+                        }
+                    }
                     rooms.get(index).setRoomNumber(roomNumber);
                     break;
                 case 2:
-                    System.out.println("Current number of beds: " + rooms.get(index).getNumberOfBeds() + "New number of beds: ");
-                    int numberOfBeds = Integer.parseInt(input.nextLine());
+                    int numberOfBeds = 0;
+                    while (numberOfBeds < 1) {
+                        System.out.println("Current number of beds: " + rooms.get(index).getNumberOfBeds() + " New number of beds: ");
+                        numberOfBeds = Integer.parseInt(input.nextLine());
+                        if (numberOfBeds < 1) {
+                            System.out.println("There must be minimum 1 bed");
+                        }
+                    }
                     rooms.get(index).setNumberOfBeds(numberOfBeds);
                     break;
                 case 3:
-                    System.out.println("Current Balcony status: " + rooms.get(index).getHasBalcony() + " New balcony status: ");
-                    Boolean hasBalcony = Boolean.parseBoolean(input.nextLine());
+                    int balcony = 0;
+                    boolean hasBalcony = false;
+                    while (balcony < 1 || balcony > 2) {
+                        System.out.println("Current Balcony status: " + rooms.get(index).getHasBalcony() + ", Does the room have a Balcony? " +
+                                "\n 1: Yes \n 2: No");
+                        balcony = Integer.parseInt(input.nextLine());
+                        switch (balcony) {
+                            case 1:
+                                hasBalcony = true;
+                                break;
+                            case 2:
+                                hasBalcony = false;
+                                break;
+                            default:
+                                System.out.println("Invalid input, 1 or 2");
+                        }
+                    }
                     rooms.get(index).setHasBalcony(hasBalcony);
                     break;
                 case 4:
-                    System.out.println("Current Price per night: " + rooms.get(index).getPricePerNight() + " New price per night: ");
-                    double pricePerNight = Double.parseDouble(input.nextLine());
+                    double pricePerNight = 0;
+                    while (pricePerNight < 1) {
+                        System.out.println("Current Price per night: " + rooms.get(index).getPricePerNight() + " New price per night: ");
+                        pricePerNight = Double.parseDouble(input.nextLine());
+                        if (pricePerNight < 1) {
+                            System.out.println("The price must be a positive number!");
+                        }
+                    }
                     rooms.get(index).setPricePerNight(pricePerNight);
                     break;
                 case 5:
@@ -527,11 +679,11 @@ public class HotelLogic {
         }
     }
 
-    public void viewAvailableRoomsByDate() {
-
-    }
-
     public void viewBookingHistory(int customerIndex) {
+        if (customerIndex == -1) {
+            customerIndex = correctSSN();
+        }
+
         ArrayList<Booking> yourBookings = new ArrayList<>();
         for (int i = 0; i < bookings.size(); i++) {
             if (bookings.get(i).getCustomer() == customers.get(customerIndex)) {
@@ -542,45 +694,132 @@ public class HotelLogic {
 
     }
 
-    public void editProfile(int index) {
+    public void editProfile(int customerIndex) {
+        boolean editSSN = false;
+        if (customerIndex == -1) {
+            editSSN = true;
+            customerIndex = correctSSN();
+        }
+
         boolean exit = true;
         while (exit) {
-            System.out.println("edit 1,SSN 2,name 3, address 4, phone number 5, exit");
+            System.out.println("Edit - \n 1: SSN \n 2: Name \n 3: Address \n 4: Phone number \n 5: exit");
             int choice = Integer.parseInt(input.nextLine());
             switch (choice) {
                 case 1:
-                    System.out.print("Current social security number: " + customers.get(index).getSocialSecurityNumber() + "\nEnter a new social security number: ");
-                    String SocialSecurityNumber = input.nextLine();
-                    customers.get(index).setSocialSecurityNumber(SocialSecurityNumber);
+                    if (editSSN) {
+                        String SSN = "";
+                        while (SSN.length() != 10) {
+                            System.out.print("Current social security number: " + customers.get(customerIndex).getSocialSecurityNumber()
+                                    + "\nEnter a new social security number: ");
+                            SSN = input.nextLine();
+                            if (SSN.length() != 10) {
+                                System.out.println("SSN should be in format (YYMMDDXXXX)");
+                            }
+                        }
+                        customers.get(customerIndex).setSocialSecurityNumber(SSN);
+                    } else {
+                        System.out.println("You are not allowed to change this, please contact the hotel employees.");
+                    }
                     break;
                 case 2:
-                    System.out.print("Current name: " + customers.get(index).getName() + "\nNew name: ");
+                    System.out.print("Current name: " + customers.get(customerIndex).getName() + "\nNew name: ");
                     String name = input.nextLine();
-                    customers.get(index).setName(name);
+                    customers.get(customerIndex).setName(name);
                     break;
                 case 3:
-                    System.out.print("Current address: " + customers.get(index).getAddress() + "\nEnter a new address: ");
+                    System.out.print("Current address: " + customers.get(customerIndex).getAddress() + "\nEnter a new address: ");
                     String address = input.nextLine();
-                    customers.get(index).setAddress(address);
+                    customers.get(customerIndex).setAddress(address);
                     break;
                 case 4:
-                    System.out.print("Current phone number: " + customers.get(index).getTelephoneNumber() + "\nEnter a new phone number: ");
+                    System.out.print("Current phone number: " + customers.get(customerIndex).getTelephoneNumber() + "\nEnter a new phone number: ");
                     String TelephoneNumber = input.nextLine();
-                    customers.get(index).setTelephoneNumber(TelephoneNumber);
+                    customers.get(customerIndex).setTelephoneNumber(TelephoneNumber);
                     break;
                 case 5:
                     exit = false;
                     break;
                 default:
-                    System.out.println("Ivalid input, 1-5");
+                    System.out.println("Invalid input, 1-5");
                     break;
             }
         }
     }
 
+    public int correctSSN() {
+        int customerIndex = -1;
+        while (customerIndex == -1) {
+            String SSN = "";
+            while (SSN.length() != 10) {
+                System.out.println("Enter the SSN of the customer.");
+                SSN = input.nextLine();
+                if (SSN.length() != 10) {
+                    System.out.println("SSN should be in format (YYMMDDXXXX)");
+                }
+            }
+
+            for (int i = 0; i < customers.size(); i++) {
+                if (customers.get(i).getSocialSecurityNumber().equals(SSN)) {
+                    customerIndex = i;
+                }
+            }
+            if (customerIndex == -1) {
+                System.out.println("The customer does not exist!");
+            }
+        }
+        return customerIndex;
+    }
+
+    public void cancelBooking(int customerIndex) {
+        if (customerIndex == -1) {
+            customerIndex = correctSSN();
+        }
+        int bookingID = 0;
+        int bookingIndex = -1;
+        while (bookingIndex < 0) {
+            while (bookingID < 1) {
+                System.out.println("Enter bookingID");
+                bookingID = Integer.parseInt(input.nextLine());
+                if (bookingID < 1) {
+                    System.out.println("You booking ID must be a positive number");
+                }
+            }
+            for (int i = 0; i < bookings.size(); i++) {
+                if (bookings.get(i).getBookingId() == bookingID) {
+                    bookingIndex = i;
+                }
+            }
+            if (bookingIndex < 0) {
+                System.out.println("The booking ID does not exist!");
+                bookingID = 0;
+            } else if (bookings.get(bookingIndex).getCustomer() == customers.get(customerIndex)) {
+                System.out.println(bookings.get(bookingIndex));
+                System.out.println("Is this the correct booking information? \n 1: Yes \n 2: No");
+                int correct = Integer.parseInt(input.nextLine());
+                switch (correct) {
+                    case 1:
+                        bookings.remove(bookingIndex);
+                        System.out.println("Booking was removed succesfully!");
+                        break;
+                    case 2:
+                        bookingIndex = -1;
+                        bookingID = 0;
+                        break;
+                    default:
+                        System.out.println("Invalid input, 1 or 2!");
+                        break;
+                }
+            }else {
+                System.out.println("The booking id and the customer does not match");
+                bookingIndex = -1;
+                bookingID = 0;
+            }
+        }
+    }
+
     public void printCustomerMenu() {
-        System.out.println("---- Hello and Welcome to our Hotel Application ----");
-        System.out.println("------------------------------------------------");
+        System.out.println();
         System.out.println("1: View available rooms");
         System.out.println("------------------------------------------------");
         System.out.println("2: View booking history");
@@ -589,13 +828,18 @@ public class HotelLogic {
         System.out.println("------------------------------------------------");
         System.out.println("4: Edit your info");
         System.out.println("------------------------------------------------");
-        System.out.println("5: Exit to log in menu");
+        System.out.println("5: Check in");
+        System.out.println("------------------------------------------------");
+        System.out.println("6: Check out");
+        System.out.println("------------------------------------------------");
+        System.out.println("7: Cancel booking");
+        System.out.println("------------------------------------------------");
+        System.out.println("8: Exit to log in menu");
         System.out.println("------------------------------------------------");
     }
 
     public void printEmployeeMenu() {
-        System.out.println("---- Hello and Welcome to our Hotel Application ----");
-        System.out.println("------------------------------------------------");
+        System.out.println();
         System.out.println("1: View all customers.");
         System.out.println("------------------------------------------------");
         System.out.println("2: View all rooms.");
@@ -626,7 +870,9 @@ public class HotelLogic {
         System.out.println("------------------------------------------------");
         System.out.println("15: Edit customer.");
         System.out.println("------------------------------------------------");
-        System.out.println("16: Exit to log in menu!");
+        System.out.println("16: Cancel booking.");
+        System.out.println("------------------------------------------------");
+        System.out.println("17: Exit to log in menu!");
         System.out.println("------------------------------------------------");
     }
 }
