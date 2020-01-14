@@ -38,7 +38,7 @@ public class HotelApp {
                 case 2:
                     customerIndex = H.customerLogIn();
                     if(customerIndex !=-1){
-                    customer = true;
+                        customer = true;
                     }
                     break;
                 case 3:

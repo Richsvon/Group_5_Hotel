@@ -2,7 +2,11 @@ package com.company;
 
 import javax.swing.*;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class HotelLogic {
@@ -10,6 +14,7 @@ public class HotelLogic {
     private ArrayList<Room> rooms = new ArrayList<>();
     private ArrayList<Booking> bookings = new ArrayList<>();
     private ArrayList<Customer> customers = new ArrayList<>();
+    private ArrayList<BookingDate> bookingDates = new ArrayList<>();
 
     /*to get the right path for the text file
     Right click the text file in /src/com.company or make your own one
@@ -30,9 +35,17 @@ public class HotelLogic {
         customers.add(new Customer("9801030000", "Jesper", "vägen33", "0703333"));
         customers.add(new Customer("9801040000", "Achmaad", "vägen44", "0704444"));
 
-        bookings.add(new Booking(99, rooms, customers.get(0)));
-        bookings.add(new Booking(199, rooms, customers.get(1)));
-        bookings.add(new Booking(150, rooms, customers.get(2)));
+        bookings.add(new Booking(2999, LocalDate.parse("2020-01-20"), LocalDate.parse("2020-01-25"), 1, customers.get(0)));
+        bookings.add(new Booking(3333, LocalDate.parse("2020-01-15"), LocalDate.parse("2020-01-16"), 2, customers.get(1)));
+        bookings.add(new Booking(4444, LocalDate.parse("2020-02-06"), LocalDate.parse("2020-02-09"), 3, customers.get(2)));
+
+        bookingDates.add(new BookingDate(LocalDate.parse("2020-01-20"), LocalDate.parse("2020-01-25"), 1));
+        bookingDates.add(new BookingDate(LocalDate.parse("2020-01-15"), LocalDate.parse("2020-01-16"), 2));
+        bookingDates.add(new BookingDate(LocalDate.parse("2020-02-06"), LocalDate.parse("2020-02-09"), 3));
+
+        //bookings.add(new Booking(99, rooms, customers.get(0)));
+        // bookings.add(new Booking(199, rooms, customers.get(1)));
+        // bookings.add(new Booking(150, rooms, customers.get(2)));
     }
 
 
@@ -40,7 +53,7 @@ public class HotelLogic {
         arrBookingCopy.addAll(bookings);
         for (int i = 0; i < bookings.size(); i++) {
             String totalPrice = String.valueOf(arrBookingCopy.get(i).getTotalPrice());
-            String rooms = String.valueOf(arrBookingCopy.get(i).getRooms());
+            String rooms = String.valueOf(arrBookingCopy.get(i).getRoom());
             String customer = String.valueOf(arrBookingCopy.get(i).getCustomer());
 
             String allTheInfo = "Info about: " + customer + ",\n" +
@@ -264,46 +277,79 @@ public class HotelLogic {
         }
 
         double totalPrice = 0;
-        ArrayList<Room> roomsToBook = new ArrayList<>();
+        bookingDates.sort(Comparator.comparing(BookingDate::getCheckInDate));
 
-        int numberOfRooms = 0;
-        while (numberOfRooms < 1) {
-            System.out.println("How many rooms do you want to book");
-            numberOfRooms = Integer.parseInt(input.nextLine());
-            if (numberOfRooms < 1) {
-                System.out.println("You must book atleast one room.");
-            }
-        }
 
-        int numberOfNights = 0;
-        while (numberOfNights < 1) {
-            System.out.println("How many nights do you want to book?");
-            numberOfNights = Integer.parseInt(input.nextLine());
-            if (numberOfNights < 1) {
-                System.out.println("You must book atleast one night.");
-            }
-        }
+        System.out.print("Check in date (yyyy-mm-dd): ");
+        String checkInDate = input.nextLine();
 
-        for (int i = 0; i < numberOfRooms; i++) {
-            int roomIndex = -1;
-            while (roomIndex == -1) {
-                viewAvailableRooms();
-                System.out.println("Enter the room number of the room you want to book!");
-                int roomNumber = Integer.parseInt(input.nextLine());
+        System.out.print("Check out date (yyyy-mm-dd): ");
+        String checkOutDate = input.nextLine();
+
+
+        LocalDate testCheckInDate = LocalDate.parse(checkInDate);
+        LocalDate testCheckOutDate = LocalDate.parse(checkOutDate); // Gör om checkIn/checkOut från string till localdate.
+        List<Room> rooms2 = new ArrayList<>(rooms); //Kopierar rooms arraylist för att senare printa tillgängliga rum.
+
+        for (int i = 0; i < bookingDates.size(); i++)   {
+            int m = bookingDates.get(i).getRoomNumber();
+
+            if (testCheckInDate.isBefore(bookingDates.get(i).getCheckOutDate()) && testCheckOutDate.isAfter(bookingDates.get(i).getCheckOutDate()) || testCheckInDate.isBefore(bookingDates.get(i).getCheckInDate()) && testCheckOutDate.isAfter(bookingDates.get(i).getCheckInDate()) || testCheckInDate.isAfter(bookingDates.get(i).getCheckInDate()) && testCheckOutDate.isBefore(bookingDates.get(i).getCheckOutDate()) || testCheckInDate.equals(bookingDates.get(i).getCheckInDate()) || testCheckOutDate.equals(bookingDates.get(i).getCheckOutDate())) {
                 for (int j = 0; j < rooms.size(); j++) {
-                    if (rooms.get(i).getRoomNumber() == roomNumber) {
-                        roomIndex = j;
+                    if (rooms.get(j).getRoomNumber() == m) {
+                        rooms2.remove(j);
                     }
                 }
-                if (roomIndex == -1) {
-                    System.out.println("That room number does not exist");
+            }
+        }
+
+        System.out.println("\n \nPrinting a list of all available rooms for the chosen date");
+        System.out.println("-----------------------------------------------");
+        for (int i = 0; i < rooms2.size(); i++) {
+            System.out.println("Room number: " + rooms2.get(i).getRoomNumber());
+            System.out.println("Number of beds: " + rooms2.get(i).getNumberOfBeds());
+            System.out.println("Balcony : " + rooms2.get(i).getHasBalcony());
+            System.out.println("Price per night: " + rooms2.get(i).getPricePerNight());
+            System.out.println("-----------------------------------------------");
+        }
+
+        int roomLoop = 1;
+        while (roomLoop == 1) {
+            System.out.print("Enter the number of the room you would like to book: ");
+            int bookRoom = Integer.parseInt(input.nextLine());
+            for (int i = 0; i < rooms2.size(); i++) {
+                if (rooms2.get(i).getRoomNumber() == bookRoom) {
+                    System.out.println("Booking successful!");
+
+                    bookingDates.add(new BookingDate(testCheckInDate, testCheckOutDate, bookRoom));
+
+
+                    long numberOfNights = ChronoUnit.DAYS.between(testCheckInDate, testCheckOutDate);
+                    totalPrice = totalPrice + (rooms2.get(i).getPricePerNight() * numberOfNights);
+                    bookings.add(new Booking(totalPrice, testCheckInDate, testCheckOutDate, bookRoom, customers.get(customerIndex)));
+                    roomLoop++;
                 }
             }
-            totalPrice = totalPrice + (rooms.get(roomIndex).getPricePerNight() * numberOfNights);
-            roomsToBook.add(rooms.get(roomIndex));
+            if (roomLoop == 1) {
+                System.out.println("Booking unsuccessful, please try again.");
+            }
         }
-        bookings.add(new Booking(totalPrice, roomsToBook, customers.get(customerIndex)));
-        System.out.println("Booking was made successfully!");
+
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        for (int i = 0; i < bookings.size(); i++)   {
+            System.out.println("Total price: "  + bookings.get(i).getTotalPrice());
+            System.out.println("Check in date: "  + bookings.get(i).getCheckInDate());
+            System.out.println("Check out date: "  + bookings.get(i).getCheckOutDate());
+            System.out.println("Room number: "  + bookings.get(i).getRoom());
+            System.out.println("Name of customer: "  + bookings.get(i).getCustomer().getName());
+            System.out.println();
+            System.out.println();
+        }
+
+
     }
 
     public void checkIn(int customerIndex) {
@@ -334,9 +380,11 @@ public class HotelLogic {
                 int correct = Integer.parseInt(input.nextLine());
                 switch (correct) {
                     case 1:
-                        ArrayList<Room> roomsCheckIn = bookings.get(bookingIndex).getRooms();
-                        for (int i = 0; i < roomsCheckIn.size(); i++) {
-                            roomsCheckIn.get(i).setIsBooked(true);
+                        int roomNumber = bookings.get(bookingIndex).getRoom();
+                        for (int i = 0; i < rooms.size(); i++)  {
+                            if (roomNumber == rooms.get(i).getRoomNumber()) {
+                                rooms.get(i).setIsBooked(true);
+                            }
                         }
                         System.out.println("Check in was made successfully!");
                         break;
@@ -384,9 +432,11 @@ public class HotelLogic {
                 int correct = Integer.parseInt(input.nextLine());
                 switch (correct) {
                     case 1:
-                        ArrayList<Room> roomsCheckIn = bookings.get(bookingIndex).getRooms();
-                        for (int i = 0; i < roomsCheckIn.size(); i++) {
-                            roomsCheckIn.get(i).setIsBooked(false);
+                        int roomNumber = bookings.get(bookingIndex).getRoom();
+                        for (int i = 0; i < rooms.size(); i++)  {
+                            if (roomNumber == rooms.get(i).getRoomNumber()) {
+                                rooms.get(i).setIsBooked(false);
+                            }
                         }
                         System.out.println("Check out was made successfully!");
                         break;
