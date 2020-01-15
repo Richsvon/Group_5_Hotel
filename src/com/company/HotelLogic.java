@@ -866,6 +866,7 @@ public class HotelLogic {
                 bookingID = 0;
             }
         }
+        //.
     }
 
     public void printCustomerMenu() {
