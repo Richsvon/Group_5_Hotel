@@ -821,53 +821,53 @@ public class HotelLogic {
         return customerIndex;
     }
 
-    public void cancelBooking(int customerIndex) {
-        if (customerIndex == -1) {
-            customerIndex = correctSSN();
-        }
-        int bookingID = 0;
-        int bookingIndex = -1;
-        while (bookingIndex < 0) {
-            while (bookingID < 1) {
-                System.out.println("Enter bookingID");
-                bookingID = Integer.parseInt(input.nextLine());
-                if (bookingID < 1) {
-                    System.out.println("You booking ID must be a positive number");
-                }
-            }
-            for (int i = 0; i < bookings.size(); i++) {
-                if (bookings.get(i).getBookingId() == bookingID) {
-                    bookingIndex = i;
-                }
-            }
-            if (bookingIndex < 0) {
-                System.out.println("The booking ID does not exist!");
-                bookingID = 0;
-            } else if (bookings.get(bookingIndex).getCustomer() == customers.get(customerIndex)) {
-                System.out.println(bookings.get(bookingIndex));
-                System.out.println("Is this the correct booking information? \n 1: Yes \n 2: No");
-                int correct = Integer.parseInt(input.nextLine());
-                switch (correct) {
-                    case 1:
-                        bookings.remove(bookingIndex);
-                        System.out.println("Booking was removed succesfully!");
-                        break;
-                    case 2:
-                        bookingIndex = -1;
-                        bookingID = 0;
-                        break;
-                    default:
-                        System.out.println("Invalid input, 1 or 2!");
-                        break;
-                }
-            }else {
-                System.out.println("The booking id and the customer does not match");
-                bookingIndex = -1;
-                bookingID = 0;
-            }
-        }
-        //.
-    }
+//    public void cancelBooking(int customerIndex) {
+//        if (customerIndex == -1) {
+//            customerIndex = correctSSN();
+//        }
+//        int bookingID = 0;
+//        int bookingIndex = -1;
+//        while (bookingIndex < 0) {
+//            while (bookingID < 1) {
+//                System.out.println("Enter bookingID");
+//                bookingID = Integer.parseInt(input.nextLine());
+//                if (bookingID < 1) {
+//                    System.out.println("You booking ID must be a positive number");
+//                }
+//            }
+//            for (int i = 0; i < bookings.size(); i++) {
+//                if (bookings.get(i).getBookingId() == bookingID) {
+//                    bookingIndex = i;
+//                }
+//            }
+//            if (bookingIndex < 0) {
+//                System.out.println("The booking ID does not exist!");
+//                bookingID = 0;
+//            } else if (bookings.get(bookingIndex).getCustomer() == customers.get(customerIndex)) {
+//                System.out.println(bookings.get(bookingIndex));
+//                System.out.println("Is this the correct booking information? \n 1: Yes \n 2: No");
+//                int correct = Integer.parseInt(input.nextLine());
+//                switch (correct) {
+//                    case 1:
+//                        bookings.remove(bookingIndex);
+//                        System.out.println("Booking was removed succesfully!");
+//                        break;
+//                    case 2:
+//                        bookingIndex = -1;
+//                        bookingID = 0;
+//                        break;
+//                    default:
+//                        System.out.println("Invalid input, 1 or 2!");
+//                        break;
+//                }
+//            }else {
+//                System.out.println("The booking id and the customer does not match");
+//                bookingIndex = -1;
+//                bookingID = 0;
+//            }
+//        }
+//        //.
+//    }
 
     public void printCustomerMenu() {
         System.out.println();
